@@ -29,21 +29,40 @@
 
         <div class="note-container">
 
-            <div class="note">
-                <div class="note-data">
-                    <div class="note-text">2026-05-16</div>
-                    <div class="note-text">Note Title</div>
-                    <div class="note-text">
-                        <input type="checkbox">
-                        <label for="checkbox">Done?</label>
+            <details class="note">
+                <summary class="note-header">
+                    <div class="my-checkbox">
+                        <input type="checkbox" id="myCheckbox">
+                        <label for="myCheckbox">
+                            <img class="unchecked-img" src="./images/components/checkbox-unchecked.png"
+                                alt="unchecked">
+                            <img class="checked-img" src="./images/components/checkbox-checked.png"
+                                alt="checked">
+                        </label>
                     </div>
-                    <div class="note-text">Note content goes here...</div>
-                </div>
-                <div class="note-controls">
-                    <button class="btn_edit icon">✏️</button>
+                    <div>2026-05-16</div>
+                    <div>Note Title</div>
+                </summary>
+
+                <div class="note-details">
+                    <div class="note-text">
+                        Note content goes here...
+                        Note content goes here...
+                        Note content goes here...
+                        Note content goes here...
+                        Note content goes here...
+                        Note content goes here...
+                        Note content goes here...
+                        Note content goes here...
+                        Note content goes here...
+                        Note content goes here...
+                        Note content goes here...
+                        Note content goes here...
+                    </div>
                     <button class="btn_delete icon">🗑️</button>
+                    <button class="btn_edit icon">✏️</button>
                 </div>
-            </div>
+            </details>
 
         </div>
     </main>
