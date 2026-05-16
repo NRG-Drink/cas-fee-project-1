@@ -1,19 +1,55 @@
 <!doctype html>
 <html lang="de">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Note App</title>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
-            integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU="
-            crossorigin="anonymous"
-            defer
-        ></script>
-        <script src="scripts/index.js" type="module"></script>
 
-        <link rel="stylesheet" href="styles/index.css" />
-    </head>
-    <body>
-        <h1>Note App</h1>
-    </body>
+<head>
+    <meta charset="UTF-8" />
+    <title>Note App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
+        integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
+    <script src="scripts/index.js" type="module"></script>
+
+    <link rel="stylesheet" href="styles/index.css" />
+</head>
+
+<body>
+    <header>
+        <h2>CAS FEE Project 1 - Note App</h2>
+    </header>
+
+    <main>
+        <div class="menu">
+            <button id="btn_create-note">Create Note</button>
+            <button id="btn_theme-toggle">🌞/🌚</button>
+        </div>
+
+        <div class="note-filter-bar">
+            <button id="btn_sort-title">Sort by Title</button>
+            <button id="btn_sort-date">Sort by Date</button>
+        </div>
+
+        <div class="note-container">
+
+            <div class="note">
+                <div class="note-data">
+                    <div class="note-text">2026-05-16</div>
+                    <div class="note-text">Note Title</div>
+                    <div class="note-text">
+                        <input type="checkbox">
+                        <label for="checkbox">Done?</label>
+                    </div>
+                    <div class="note-text">Note content goes here...</div>
+                </div>
+                <div class="note-controls">
+                    <button class="btn_edit icon">✏️</button>
+                    <button class="btn_delete icon">🗑️</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+    </footer>
+</body>
+
 </html>
