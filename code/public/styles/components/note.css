@@ -11,21 +11,24 @@
 }
 
 .note {
-    background-color: var(--note-background);
+    background-color: var(--card-color);
     margin-top: 10px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 10px; 
+    padding: 12px 14px;
 
-    /* min-height: 100px; */
-    border: 4px solid var(--highlight-color);
-    border-radius: 10px;
-    box-shadow: 5px 5px 10px black;
+    border: 4px solid var(--card-border-color);
+    border-left: 4px solid var(--card-border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s ease;
+}
+
+.note:hover {
+    box-shadow: var(--shadow), 0 0 0 2px var(--glow-color);
 }
 
 .note-header {
     display: grid;
-    grid-template-columns: 30px 120px 1fr;
+    grid-template-columns: 40px 120px 1fr;
     align-items: start;
 
     font-size: 1.2em;
@@ -33,15 +36,8 @@
     cursor: pointer;
 }
 
-.note-checkbox {
-    all: unset;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px;
-    border: 1px solid var(--highlight-color);
-    border-radius: 5px;
+.note-checkbox:hover {
+    box-shadow: 0 0 0 2px var(--glow-color);
 }
 
 .note-details {
@@ -51,12 +47,14 @@
     justify-content: space-between;
     column-gap: 10px;
     margin-top: 10px;
-    margin-left: 30px;
+    margin-left: 40px;
 }
 
 .note-text {
     display: flex;
     font-size: 1.1em;
-    border-top: 1px solid var(--highlight-color);
-    padding-top: 5px;
+    color: var(--text-color);
+    border-top: 1px solid var(--card-border-color);
+    padding-top: 8px;
+    margin-right: 5px;
 }

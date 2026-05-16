@@ -5,13 +5,29 @@
 @import "./components/checkbox.css";
 
 body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     background-color: var(--background-color);
     color: var(--text-color);
     padding: 10px;
+    border: 4px solid var(--border-color);
 }
 
 main {
     width: 100%;
-    max-width: 1200px;
-    border: var(--border);
+    max-width: 1000px;
+    border: 4px solid var(--border-color);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.header-image {
+    height: 3rem;
+    margin-right: 10px;
 }
