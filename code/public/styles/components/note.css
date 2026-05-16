@@ -28,7 +28,7 @@
 
 .note-header {
     display: grid;
-    grid-template-columns: 40px 120px 1fr;
+    grid-template-columns: 40px 120px 1fr 140px;
     align-items: start;
 
     font-size: 1.2em;
