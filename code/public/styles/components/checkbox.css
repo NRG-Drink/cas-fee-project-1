@@ -4,23 +4,16 @@ input[type="checkbox"] {
     position: absolute;
 }
 
-label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-}
-
 .checked-img {
     display: none;
-    width: 24px;
-    height: 24px;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
 }
 
 .unchecked-img {
     display: block;
-    width: 24px;
-    height: 24px;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
 }
 
 /* Swap images when checked */
@@ -32,10 +25,11 @@ input[type="checkbox"]:checked + label .checked-img {
     display: block;
 }
 
-.my-checkbox {
-    cursor: progress;
-}
-
 input[type="checkbox"] {
     cursor: pointer;
+}
+
+.my-checkbox label {
+    padding: 0;
+    margin: 0;
 }

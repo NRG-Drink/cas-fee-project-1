@@ -1,0 +1,31 @@
+/* Hide the actual radio buttons visually */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    border: none;
+
+    padding: 0;
+    margin: 0;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+/* Style the star labels */
+.star-rating label {
+    letter-spacing: var(--rating-letter-spacing);
+    font-size: var(--rating-font-size);
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+    opacity: 0.2;
+}
+
+/* Highlight hovered star and all stars before it (to the right, due to flex-direction: row-reverse) */
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+/* Highlight selected star and all stars before it */
+.star-rating input[type="radio"]:checked ~ label {
+    opacity: 1;
+}

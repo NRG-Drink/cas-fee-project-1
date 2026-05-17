@@ -11,7 +11,7 @@ button {
 
 button:hover {
     filter: brightness(1.1);
-    box-shadow: 0 0 0 3px var(--button-glow-color);
+    box-shadow: 0 0 4px 2px var(--button-glow-color);
 }
 
 button:active {
@@ -31,5 +31,5 @@ button.icon {
 }
 
 button.icon:hover {
-    box-shadow: 0 0 0 2px var(--button-glow-color);
+    box-shadow: 0 0 4px 2px var(--button-glow-color);
 }

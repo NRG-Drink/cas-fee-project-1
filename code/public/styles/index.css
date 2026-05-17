@@ -2,7 +2,16 @@
 @import "./components/button.css";
 @import "./components/menu.css";
 @import "./components/note.css";
+@import "./components/note-edit.css";
 @import "./components/checkbox.css";
+@import "./components/rating.css";
+
+:root {
+    --rating-letter-spacing: -9px;
+    --rating-font-size: 1.15rem;
+
+    --checkbox-size: 24px;
+}
 
 body {
     display: flex;
@@ -13,13 +22,11 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     padding: 10px;
-    border: 4px solid var(--border-color);
 }
 
 main {
     width: 100%;
     max-width: 1000px;
-    border: 4px solid var(--border-color);
 }
 
 .header {
