@@ -1,29 +1,21 @@
 const html = document.documentElement;
-// Buttons
 const btnToggle = document.getElementById('btn_theme-toggle');
-const btnCreate = document.getElementById('btn_create-note');
 
-const themes = ['light', 'dark'];
-const icons = { light: '🌞 Light', dark: '🌚 Dark' };
-
-let current = localStorage.getItem('theme') || 'auto';
+let themeIndex = 0;
+const themeValues = [
+    { name: 'Dark', value: 'dark', icon: '🌚' },
+    { name: 'Light', value: 'light', icon: '🌞' }
+]
 
 function applyTheme(theme) {
-    if (theme === 'auto') {
-        html.removeAttribute('data-theme');
-    } else {
-        html.setAttribute('data-theme', theme);
-    }
-
-    btnToggle.textContent = icons[theme];
-    localStorage.setItem('theme', theme);
+    html.setAttribute('data-theme', theme.value);
+    btnToggle.textContent = `${theme.icon} ${theme.name}`;
 }
 
 // Apply saved theme on load
-applyTheme(current);
+applyTheme(themeValues[themeIndex]);
 
 btnToggle.addEventListener('click', () => {
-    const next = themes[(themes.indexOf(current) + 1) % themes.length];
-    current = next;
-    applyTheme(next);
+    themeIndex = (themeIndex + 1) % themeValues.length;
+    applyTheme(themeValues[themeIndex]);
 });
