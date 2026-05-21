@@ -1,3 +1,40 @@
-* {
-    box-sizing: border-box;
+@import "./themes.css";
+@import "./components/button.css";
+@import "./components/menu.css";
+@import "./components/note.css";
+@import "./components/note-edit.css";
+@import "./components/checkbox.css";
+@import "./components/rating.css";
+
+:root {
+    --rating-letter-spacing: -9px;
+    --rating-font-size: 1.15rem;
+
+    --checkbox-size: 24px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: 10px;
+}
+
+main {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.header-image {
+    height: 3rem;
+    margin-right: 10px;
 }

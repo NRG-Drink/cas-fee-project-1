@@ -1,19 +1,123 @@
 <!doctype html>
 <html lang="de">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Note App</title>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
-            integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU="
-            crossorigin="anonymous"
-            defer
-        ></script>
-        <script src="scripts/index.js" type="module"></script>
 
-        <link rel="stylesheet" href="styles/index.css" />
-    </head>
-    <body>
-        <h1>Note App</h1>
-    </body>
+<head>
+    <meta charset="UTF-8" />
+    <title>Note App</title>
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
+        integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script>
+    <script src="scripts/index.js" type="module"></script>
+
+    <link rel="stylesheet" href="styles/index.css" />
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <img src="images/ost-logo.png" alt="Beispielbild" class="header-image" />
+            <h2>CAS FEE Project 1 - Note App</h2>
+        </div>
+    </header>
+
+    <main>
+        <section id="note-view">
+            <div class="menu">
+                <button id="btn_create-note">Create Note</button>
+                <button id="btn_theme-toggle">🌞/🌚</button>
+            </div>
+
+            <div class="note-filter-bar">
+                <button id="btn_sort-title">Sort by Title</button>
+                <button id="btn_sort-due-date">Sort by Due Date</button>
+                <button id="btn_sort-creation-date">Sort by Creation Date</button>
+                <button id="btn_sort-importance">Sort by Importance</button>
+                <button id="btn_filter-completed">Filter Completed</button>
+            </div>
+
+            <div class="note note-container">
+                <div class="my-checkbox">
+                    <input type="checkbox" id="myCheckbox">
+                    <label for="myCheckbox">
+                        <img class="unchecked-img" src="./images/components/checkbox-unchecked.png" alt="unchecked">
+                        <img class="checked-img" src="./images/components/checkbox-checked.png" alt="checked">
+                    </label>
+                </div>
+
+                <details class="note-data">
+                    <!-- <details class="note"> -->
+                    <summary class="note-header">
+                        <div class="note-due-date">2026-05-16</div>
+                        <div class="note-title">Note Title</div>
+                        <div class="note-importance">🔥🔥🔥🔥🔥</div>
+                    </summary>
+
+                    <div class="note-details">
+                        <div class="note-text">
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                        </div>
+                        <button class="btn_delete icon">🗑️</button>
+                        <button class="btn_edit icon">✏️</button>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section id="note-edit">
+            <div class="note note-container">
+                <div class="my-checkbox">
+                    <input type="checkbox" id="myCheckbox">
+                    <label for="myCheckbox">
+                        <img class="unchecked-img" src="./images/components/checkbox-unchecked.png" alt="unchecked">
+                        <img class="checked-img" src="./images/components/checkbox-checked.png" alt="checked">
+                    </label>
+                </div>
+
+                <div class="note-data">
+                    <div class="note-header">
+                        <input type="date" id="note-due-date" />
+                        <input type="text" id="note-title" placeholder="Title" />
+                        <fieldset class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5" />
+                            <label for="star5" title="Herausragend">🔥</label>
+
+                            <input type="radio" id="star4" name="rating" value="4" />
+                            <label for="star4" title="Sehr wichtig">🔥</label>
+
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label for="star3" title="Mittel wichtig">🔥</label>
+
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label for="star2" title="Weniger wichtig">🔥</label>
+
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label for="star1" title="Unwichtig">🔥</label>
+                        </fieldset>
+                    </div>
+
+                    <div class="note-details">
+                        <textarea id="note-content" placeholder="Content"></textarea>
+                        <button id="btn_cancel-note" class="icon">❌</button>
+                        <button id="btn_save-note" class="icon">💾</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+    </footer>
+</body>
+
 </html>

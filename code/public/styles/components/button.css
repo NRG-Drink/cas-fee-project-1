@@ -1,0 +1,35 @@
+button {
+    background-color: var(--button-bg);
+    color: var(--button-text-color);
+    padding: 6px 12px 6px 10px;
+    cursor: pointer;
+    border: 2px solid var(--button-border-color);
+    border-radius: 6px;
+    font-weight: 500;
+    transition: box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+button:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 0 4px 2px var(--button-glow-color);
+}
+
+button:active {
+    filter: brightness(0.95);
+}
+
+button.icon {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    border: 2px solid var(--button-border-color);
+    border-radius: 6px;
+    transition: box-shadow 0.15s ease;
+}
+
+button.icon:hover {
+    box-shadow: 0 0 4px 2px var(--button-glow-color);
+}

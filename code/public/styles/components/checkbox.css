@@ -1,0 +1,35 @@
+/* Hide real checkbox */
+input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+}
+
+.checked-img {
+    display: none;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+}
+
+.unchecked-img {
+    display: block;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+}
+
+/* Swap images when checked */
+input[type="checkbox"]:checked + label .unchecked-img {
+    display: none;
+}
+
+input[type="checkbox"]:checked + label .checked-img {
+    display: block;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.my-checkbox label {
+    padding: 0;
+    margin: 0;
+}
