@@ -1,5 +1,8 @@
+import { setupCreateNote } from './create-note.js';
 
-export const notes = [
+const notesView = document.querySelector('#note-view');
+export const notes = []; // This will hold our notes data, initially empty.
+export const testNotes = [
     {
         id: 1,
         createdAt: '2024-06-01T10:00:00Z',
@@ -20,8 +23,49 @@ export const notes = [
         importance: 5,
         open: false,
     },
+    {
+        id: 3,
+        createdAt: '2024-06-03T14:00:00Z',
+        completed: false,
+        dueDate: '2024-06-15',
+        title: 'Plan weekend trip',
+        content: 'Research destinations, book accommodations, and plan activities for the weekend trip.',
+        importance: 2,
+        open: true,
+    },
+    {
+        id: 4,
+        createdAt: '2024-06-04T16:00:00Z',
+        completed: false,
+        dueDate: '2024-06-20',
+        title: 'Read new book',
+        content: 'Start reading the new book that was recommended by a friend.',
+        importance: 1,
+        open: true,
+    },
+    {
+        id: 5,
+        createdAt: '2024-06-05T18:00:00Z',
+        completed: true,
+        dueDate: '2024-06-08',
+        title: 'Call plumber',
+        content: 'Schedule an appointment with the plumber to fix the leaking sink in the kitchen.',
+        importance: 4,
+        open: true,
+    },
+    {
+        id: 6,
+        createdAt: '2024-06-06T20:00:00Z',
+        completed: false,
+        dueDate: '2024-06-25',
+        title: 'Organize garage',
+        content: 'Clean and organize the garage, sort out old items for donation or disposal.',
+        importance: 3,
+        open: true,
+    }
 ];
 
+notes.push(...testNotes); // Add test notes to the main notes array.
 window.__notes = notes; // Expose notes to the global scope for debugging purposes.
 
 function createNoteCheckbox(id, isChecked) {
@@ -95,6 +139,23 @@ function createNoteElement(note) {
     textElement.textContent = note.content;
     contentElement.appendChild(textElement);
 
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('btn_delete-note', 'icon');
+    deleteButton.textContent = '🗑️';
+    deleteButton.addEventListener('click', () => {
+        removeNote(note.id);
+    });
+
+    const editButton = document.createElement('button');
+    editButton.classList.add('btn_edit-note', 'icon');
+    editButton.textContent = '✏️';
+    editButton.addEventListener('click', () => {
+        setupCreateNote(note);
+    });
+
+    contentElement.appendChild(deleteButton);
+    contentElement.appendChild(editButton);
+
     noteContainer.appendChild(checkbox);
     noteContainer.appendChild(noteElement);
     summaryElement.appendChild(dueDateElement);
@@ -106,8 +167,55 @@ function createNoteElement(note) {
     return noteContainer;
 }
 
+export function addNote(note) {
+    notes.push(note);
+    const newNoteElement = createNoteElement(note);
+    notesView.insertAdjacentElement('beforeend', newNoteElement);
+    newNoteElement.scrollIntoView({ behavior: 'smooth' });
+}
+
+export function updateNote(noteId, updatedNote) {
+    const noteIndex = notes.findIndex(note => note.id === noteId);
+    if (noteIndex !== -1) {
+        notes[noteIndex] = { ...notes[noteIndex], ...updatedNote };
+        const noteElement = notesView.querySelector(`[data-note-id="${noteId}"]`);
+        if (noteElement) {
+            const updatedNoteElement = createNoteElement(notes[noteIndex]);
+            notesView.replaceChild(updatedNoteElement, noteElement);
+            updatedNoteElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+}
+
+export function removeNote(noteId) {
+    const noteIndex = notes.findIndex(note => note.id === noteId);
+    if (noteIndex !== -1) {
+        notes.splice(noteIndex, 1);
+        const noteElement = notesView.querySelector(`[data-note-id="${noteId}"]`);
+        if (noteElement) {
+            notesView.removeChild(noteElement);
+        }
+    }
+
+    const noteElement = notesView.querySelector(`[data-note-id="${noteId}"]`);
+    if (noteElement) {
+        notesView.removeChild(noteElement);
+    }
+}
+
+function setNoteOpenStates(noteContainers) {
+    for (const note of noteContainers) {
+        const id = note.dataset.noteId;
+        const isOpen = note.querySelector('details').open;
+        const noteData = notes.find(n => n.id == id);
+        if (noteData) {
+            noteData.open = isOpen;
+        }
+    }
+}
+
 export function renderNotes() {
-    const notesView = document.querySelector('#note-view');
+    setNoteOpenStates(notesView.children);
     notesView.innerHTML = ''; // Clear existing notes
     notes.forEach(note => {
         const noteElement = createNoteElement(note);
