@@ -7,7 +7,7 @@
 @import "./components/rating.css";
 
 :root {
-    --rating-letter-spacing: -9px;
+    --rating-letter-spacing: -8px;
     --rating-font-size: 1.15rem;
 
     --checkbox-size: 24px;
