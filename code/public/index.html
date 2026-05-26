@@ -21,7 +21,7 @@
     </header>
 
     <main>
-        <section id="note-view">
+        <section id="menu">
             <div class="menu">
                 <button id="btn_create-note">Create Note</button>
                 <button id="btn_theme-toggle">🌞/🌚</button>
@@ -34,9 +34,54 @@
                 <button id="btn_sort-importance">Sort by Importance</button>
                 <button id="btn_filter-completed">Filter Completed</button>
             </div>
+        </section>
 
+
+        <section id="note-edit">
             <div class="note note-container">
-                <div class="my-checkbox">
+                <div class="note-checkbox">
+                    <input type="checkbox" id="edit-note-checkbox">
+                    <label for="edit-note-checkbox">
+                        <img class="unchecked-img" src="./images/components/checkbox-unchecked.png" alt="unchecked">
+                        <img class="checked-img" src="./images/components/checkbox-checked.png" alt="checked">
+                    </label>
+                </div>
+
+                <div class="note-data">
+                    <div class="note-header">
+                        <input type="date" id="edit-note-due-date" />
+                        <input type="text" id="edit-note-title" placeholder="Title" />
+                        <fieldset class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5" />
+                            <label for="star5" title="Herausragend">🔥</label>
+
+                            <input type="radio" id="star4" name="rating" value="4" />
+                            <label for="star4" title="Sehr wichtig">🔥</label>
+
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label for="star3" title="Mittel wichtig">🔥</label>
+
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label for="star2" title="Weniger wichtig">🔥</label>
+
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label for="star1" title="Unwichtig">🔥</label>
+                        </fieldset>
+                    </div>
+
+                    <div class="note-details">
+                        <textarea id="edit-note-content" placeholder="Content"></textarea>
+                        <button id="btn_cancel-note" class="icon">❌</button>
+                        <button id="btn_save-note" class="icon">💾</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="note-view">
+            <div class="note note-container">
+
+                <div class="note-checkbox">
                     <input type="checkbox" id="myCheckbox">
                     <label for="myCheckbox">
                         <img class="unchecked-img" src="./images/components/checkbox-unchecked.png" alt="unchecked">
@@ -45,7 +90,6 @@
                 </div>
 
                 <details class="note-data">
-                    <!-- <details class="note"> -->
                     <summary class="note-header">
                         <div class="note-due-date">2026-05-16</div>
                         <div class="note-title">Note Title</div>
@@ -71,47 +115,6 @@
                         <button class="btn_edit icon">✏️</button>
                     </div>
                 </details>
-            </div>
-        </section>
-
-        <section id="note-edit">
-            <div class="note note-container">
-                <div class="my-checkbox">
-                    <input type="checkbox" id="myCheckbox">
-                    <label for="myCheckbox">
-                        <img class="unchecked-img" src="./images/components/checkbox-unchecked.png" alt="unchecked">
-                        <img class="checked-img" src="./images/components/checkbox-checked.png" alt="checked">
-                    </label>
-                </div>
-
-                <div class="note-data">
-                    <div class="note-header">
-                        <input type="date" id="note-due-date" />
-                        <input type="text" id="note-title" placeholder="Title" />
-                        <fieldset class="star-rating">
-                            <input type="radio" id="star5" name="rating" value="5" />
-                            <label for="star5" title="Herausragend">🔥</label>
-
-                            <input type="radio" id="star4" name="rating" value="4" />
-                            <label for="star4" title="Sehr wichtig">🔥</label>
-
-                            <input type="radio" id="star3" name="rating" value="3" />
-                            <label for="star3" title="Mittel wichtig">🔥</label>
-
-                            <input type="radio" id="star2" name="rating" value="2" />
-                            <label for="star2" title="Weniger wichtig">🔥</label>
-
-                            <input type="radio" id="star1" name="rating" value="1" />
-                            <label for="star1" title="Unwichtig">🔥</label>
-                        </fieldset>
-                    </div>
-
-                    <div class="note-details">
-                        <textarea id="note-content" placeholder="Content"></textarea>
-                        <button id="btn_cancel-note" class="icon">❌</button>
-                        <button id="btn_save-note" class="icon">💾</button>
-                    </div>
-                </div>
             </div>
         </section>
     </main>
