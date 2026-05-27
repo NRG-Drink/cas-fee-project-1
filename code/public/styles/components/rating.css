@@ -20,6 +20,11 @@
     cursor: pointer;
     transition: opacity 0.4s ease;
     opacity: 0.2;
+
+    /* Adjust spacing for the 🧊 */
+    &:last-child {
+        letter-spacing: calc(var(--rating-letter-spacing) / 1.2);
+    }
 }
 
 /* Highlight hovered star and all stars before it (to the right, due to flex-direction: row-reverse) */
