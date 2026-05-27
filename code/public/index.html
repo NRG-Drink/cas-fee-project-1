@@ -15,7 +15,9 @@
 <body>
     <header>
         <div class="header">
-            <img src="images/ost-logo.png" alt="Beispielbild" class="header-image" />
+            <a href="https://www.ost.ch" target="_blank" rel="noopener noreferrer">
+                <img src="images/ost-logo.png" alt="Beispielbild" class="header-image" />
+            </a>
             <h2>CAS FEE Project 1 - Note App</h2>
         </div>
     </header>
@@ -27,12 +29,16 @@
                 <button id="btn_theme-toggle">🌞/🌚</button>
             </div>
 
-            <div class="note-filter-bar">
+            <div id="menu-filters" class="menu-bar">
+                <button id="btn_filter-completed">Filter Completed</button>
+                <button id="btn_filter-overdue">Filter Overdue</button>
+            </div>
+            <div id="menu-sorts" class="menu-bar">
+                <button id="btn_sort-complete">Sort by Complete</button>
                 <button id="btn_sort-title">Sort by Title</button>
                 <button id="btn_sort-due-date">Sort by Due Date</button>
                 <button id="btn_sort-creation-date">Sort by Creation Date</button>
                 <button id="btn_sort-importance">Sort by Importance</button>
-                <button id="btn_filter-completed">Filter Completed</button>
             </div>
         </section>
 
@@ -49,7 +55,7 @@
 
                 <div class="note-data">
                     <div class="note-header">
-                        <input type="date" id="edit-note-due-date" name="dueDate" required/>
+                        <input type="date" id="edit-note-due-date" name="dueDate" required />
                         <input type="text" id="edit-note-title" name="title" placeholder="Title" required />
                         <fieldset class="star-rating">
                             <input type="radio" id="star5" name="rating" value="5" />
@@ -74,8 +80,8 @@
 
                     <div class="note-details">
                         <textarea id="edit-note-content" name="content" placeholder="Content"></textarea>
-                        <button id="btn_cancel-note" class="icon">❌</button>
-                        <button id="btn_save-note" class="icon">💾</button>
+                        <button id="btn_cancel-note" type="button" class="icon">❌</button>
+                        <button id="btn_save-note" type="submit" class="icon">💾</button>
                     </div>
                 </div>
             </form>

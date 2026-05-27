@@ -75,7 +75,7 @@ export class NoteView {
             <div class="note note-container" data-note-id="${note.id}">
 
                 <div class="note-checkbox">
-                    <input type="checkbox" id="note-${note.id}-checkbox" ${note.completed ? 'checked' : ''}>
+                    <input type="checkbox" id="note-${note.id}-checkbox" ${note.completed ? 'checked' : ''} disabled>
                     <label for="note-${note.id}-checkbox">${checkbox}</label>
                 </div>
 
@@ -88,8 +88,8 @@ export class NoteView {
 
                     <div class="note-details">
                         <div class="note-text">${note.content}</div>
-                        <button class="btn_delete icon">🗑️</button>
-                        <button class="btn_edit icon">✏️</button>
+                        <button class="btn_delete icon" data-action="delete">🗑️</button>
+                        <button class="btn_edit icon" data-action="edit">✏️</button>
                     </div>
                 </details>
             </div>`;

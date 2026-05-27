@@ -1,9 +1,16 @@
 export class NoteController {
-    constructor(noteView, noteService, noteEditController, noteSortController) {
+    constructor(
+        noteView,
+        noteService,
+        noteEditController,
+        noteFilterController,
+        noteSortController) {
         this.noteView = noteView;
         this.noteService = noteService;
         this.noteEditController = noteEditController;
         this.noteEditController.withNoteSaveCallback(this.handleSaveNote);
+        this.noteFilterController = noteFilterController;
+        this.noteFilterController.withNoteFilterCallback(this.handleFilterNotes);
         this.noteSortController = noteSortController;
         this.noteSortController.withNoteSortCallback(this.handleSortNotes);
         this.noteList = document.querySelector('#note-view');
@@ -26,8 +33,13 @@ export class NoteController {
         this.noteView.createAndAddNote(note);
     }
 
-    handleSortNotes = (sortFunction, direction) => {
-        this.noteService.sortNotes(sortFunction, direction);
+    handleFilterNotes = (filterFunction) => {
+        this.noteService.filterNotes(filterFunction);
+        this.noteView.renderNotes(this.noteService.getNotes());
+    }
+
+    handleSortNotes = (sortFunction) => {
+        this.noteService.sortNotes(sortFunction);
         this.noteView.renderNotes(this.noteService.getNotes());
     }
 

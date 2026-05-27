@@ -48,7 +48,7 @@ export class NoteEditController {
         // TODO: Test data. Remove when form is working.
         this.noteEditView.prefillForm({
             title: 'New Note',
-            dueDate: '2024-06-30',
+            dueDate: new Date().toISOString().split('T')[0], // Set to today's date.
             content: 'Hier könnte Ihre Werbung stehen!',
             importance: 1,
             completed: false,
