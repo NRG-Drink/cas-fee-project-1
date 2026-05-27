@@ -29,4 +29,15 @@ export class NoteService {
     removeNote(noteId) {
         this.notes = this.notes.filter(note => note.id !== noteId);
     }
+
+    sortNotes(sortFunction, direction) {
+        if (direction === 'ascending') {
+            this.notes.sort(sortFunction);
+        } else if (direction === 'descending') {
+            this.notes.sort((a, b) => sortFunction(b, a));
+        } else {
+            // Default sorting (by ID or creation order).
+            this.notes.sort((a, b) => a.id - b.id);
+        }
+    }
 }

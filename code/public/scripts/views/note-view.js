@@ -1,11 +1,22 @@
 export class NoteView {
     constructor() {
+        this.isScrollEnabled = false;
         this.noteView = document.querySelector('#note-view');
+    }
+
+    disableScroll = (noteElement) => {
+        this.isScrollEnabled = false;
+    }
+
+    enableScroll = (noteElement) => {
+        this.isScrollEnabled = true;
     }
 
     addNote = (noteElement) => {
         this.noteView.insertAdjacentElement('beforeend', noteElement);
-        noteElement.scrollIntoView({ behavior: 'smooth' });
+        if (this.isScrollEnabled) {
+            noteElement.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 
     createAndAddNote = (note) => {
@@ -17,8 +28,11 @@ export class NoteView {
         const noteElement = this.noteView.querySelector(`[data-note-id="${noteId}"]`);
         if (noteElement) {
             const updatedNoteElement = this.createNoteElement(updatedNote);
+            if (this.isScrollEnabled) {
+                noteElement.scrollIntoView({ behavior: 'smooth' });
+            }
+
             noteElement.replaceWith(updatedNoteElement);
-            noteElement.scrollIntoView({ behavior: 'smooth' });
         }
     }
 

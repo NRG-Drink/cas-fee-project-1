@@ -2,20 +2,28 @@ import { ThemeController } from './controllers/theme-controller.js';
 import { ThemeView } from './views/theme-view.js';
 import { ThemeService } from './services/theme-service.js';
 
-import { NoteEditController } from './controllers/note-edit-controller.js';
-import { NoteEditView } from './views/note-edit-view.js';
-
-import { NoteController } from './controllers/note-controller.js';
-import { NoteView } from './views/note-view.js';
-import { NoteService } from './services/note-service.js';
-
 const themeController = new ThemeController(new ThemeView(), new ThemeService());
 themeController.initialize();
+
+import { NoteEditController } from './controllers/note-edit-controller.js';
+import { NoteEditView } from './views/note-edit-view.js';
 
 const noteEditController = new NoteEditController(new NoteEditView());
 noteEditController.initialize();
 
-const noteController = new NoteController(new NoteView(), new NoteService(getTestNotes()), noteEditController);
+import { SortController } from './controllers/sort-controller.js';
+import { SortService } from './services/sort-service.js';
+import { SortView } from './views/sort-view.js';
+import { NoteService } from './services/note-service.js';
+
+const noteService = new NoteService(getTestNotes());
+const sortController = new SortController(new SortService(), new SortView(), noteService);
+sortController.initialize();
+
+import { NoteController } from './controllers/note-controller.js';
+import { NoteView } from './views/note-view.js';
+
+const noteController = new NoteController(new NoteView(), noteService, noteEditController, sortController);
 noteController.initialize();
 
 function getTestNotes() {

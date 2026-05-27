@@ -18,6 +18,5 @@ export class NoteEditView {
 
     hide() {
         this.editNote.style.display = 'none';
-        this.editNote.scrollIntoView({ behavior: 'smooth' });
     }
 }

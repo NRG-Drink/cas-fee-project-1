@@ -1,18 +1,21 @@
 export class NoteController {
-    constructor(noteView, noteService, noteEditController) {
+    constructor(noteView, noteService, noteEditController, noteSortController) {
         this.noteView = noteView;
         this.noteService = noteService;
         this.noteEditController = noteEditController;
-        this.noteEditController.withNoteSaveCallback(this.handleSaveNote.bind(this));
+        this.noteEditController.withNoteSaveCallback(this.handleSaveNote);
+        this.noteSortController = noteSortController;
+        this.noteSortController.withNoteSortCallback(this.handleSortNotes);
         this.noteList = document.querySelector('#note-view');
     }
 
     initialize() {
         this.addEventListeners();
         this.noteView.renderNotes(this.noteService.getNotes());
+        this.noteView.enableScroll();
     }
 
-    handleSaveNote(note) {
+    handleSaveNote = (note) => {
         if (note.id) {
             this.noteService.updateNote(note);
             this.noteView.updateNote(note.id, note);
@@ -21,6 +24,11 @@ export class NoteController {
 
         this.noteService.addNote(note);
         this.noteView.createAndAddNote(note);
+    }
+
+    handleSortNotes = (sortFunction, direction) => {
+        this.noteService.sortNotes(sortFunction, direction);
+        this.noteView.renderNotes(this.noteService.getNotes());
     }
 
     addEventListeners() {
@@ -42,8 +50,7 @@ export class NoteController {
 
         const noteId = noteElement.dataset.noteId;
         const note = this.noteService.getNoteById(noteId);
-        console.log(action, 'id', noteId);
-        // console.log('Note clicked:', note);
+        console.log(action, 'note id', noteId);
 
         if (action === 'edit') {
             this.noteEditController.handleEditNote(note);
