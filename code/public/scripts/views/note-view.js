@@ -58,95 +58,37 @@ export class NoteView {
     }
 
     createNoteElement = (note) => {
-        const noteContainer = document.createElement('div');
-        noteContainer.classList.add('note', 'note-container');
-        noteContainer.dataset.noteId = note.id;
+        const template = document.createElement('template');
+        template.innerHTML = this.createNoteHtml(note).trim();
+        const noteElement = template.content.firstChild;
+        return noteElement;
+    }   
+    
+    createNoteHtml = (note) => {
+        const checkbox = note.completed
+            ? `<img class="checked-img" src="./images/components/checkbox-checked.png" alt="checked">`
+            : `<img class="unchecked-img" src="./images/components/checkbox-unchecked.png" alt="unchecked">`;
+        return `
+            <div class="note note-container" data-note-id="${note.id}">
 
-        const checkbox = this.createNoteCheckbox(`note-${note.id}-checkbox`, note.completed);
+                <div class="note-checkbox">
+                    <input type="checkbox" id="note-${note.id}-checkbox" ${note.completed ? 'checked' : ''}>
+                    <label for="note-${note.id}-checkbox">${checkbox}</label>
+                </div>
 
-        const noteElement = document.createElement('details');
-        noteElement.classList.add('note-data');
-        if (note.open) {
-            noteElement.open = true;
-        }
+                <details class="note-data">
+                    <summary class="note-header">
+                        <div class="note-due-date">${note.dueDate}</div>
+                        <div class="note-title">${note.title}</div>
+                        <div class="note-importance">${'🔥'.repeat(note.importance)}</div>
+                    </summary>
 
-        const summaryElement = document.createElement('summary');
-        summaryElement.classList.add('note-header');
-
-        const dueDateElement = document.createElement('div');
-        dueDateElement.classList.add('note-due-date');
-        dueDateElement.textContent = note.dueDate;
-
-        const titleElement = document.createElement('div');
-        titleElement.classList.add('note-title');
-        titleElement.textContent = note.title;
-
-        const ratingElement = document.createElement('div');
-        ratingElement.classList.add('note-importance');
-        ratingElement.textContent = note.importance ? '🔥'.repeat(note.importance) : '';
-
-
-        const contentElement = document.createElement('div');
-        contentElement.classList.add('note-details');
-
-        const textElement = document.createElement('div');
-        textElement.classList.add('note-text');
-        textElement.textContent = note.content;
-        contentElement.appendChild(textElement);
-
-        const deleteButton = document.createElement('button');
-        deleteButton.dataset.action = 'delete';
-        deleteButton.classList.add('btn_delete-note', 'icon');
-        deleteButton.textContent = '🗑️';
-
-        const editButton = document.createElement('button');
-        editButton.dataset.action = 'edit';
-        editButton.classList.add('btn_edit-note', 'icon');
-        editButton.textContent = '✏️';
-
-        contentElement.appendChild(deleteButton);
-        contentElement.appendChild(editButton);
-
-        noteContainer.appendChild(checkbox);
-        noteContainer.appendChild(noteElement);
-        summaryElement.appendChild(dueDateElement);
-        summaryElement.appendChild(titleElement);
-        summaryElement.appendChild(ratingElement);
-        noteElement.appendChild(summaryElement);
-        noteElement.appendChild(contentElement);
-
-        return noteContainer;
-    }
-
-    createNoteCheckbox = (id, isChecked) => {
-        const noteCheckbox = document.createElement('div');
-        noteCheckbox.classList.add('note-checkbox');
-
-        const checkboxInput = document.createElement('input');
-        checkboxInput.id = id;
-        checkboxInput.type = 'checkbox';
-        checkboxInput.checked = isChecked;
-        checkboxInput.disabled = true;
-
-        const checkboxLabel = document.createElement('label');
-        checkboxLabel.htmlFor = id;
-
-        if (isChecked) {
-            const imgChecked = document.createElement('img');
-            imgChecked.classList.add('checked-img');
-            imgChecked.src = './images/components/checkbox-checked.png';
-            imgChecked.alt = 'checked';
-            checkboxLabel.appendChild(imgChecked);
-        } else {
-            const imgUnchecked = document.createElement('img');
-            imgUnchecked.classList.add('unchecked-img');
-            imgUnchecked.src = './images/components/checkbox-unchecked.png';
-            imgUnchecked.alt = 'unchecked';
-            checkboxLabel.appendChild(imgUnchecked);
-        }
-
-        noteCheckbox.appendChild(checkboxInput);
-        noteCheckbox.appendChild(checkboxLabel);
-        return noteCheckbox;
+                    <div class="note-details">
+                        <div class="note-text">${note.content}</div>
+                        <button class="btn_delete icon">🗑️</button>
+                        <button class="btn_edit icon">✏️</button>
+                    </div>
+                </details>
+            </div>`;
     }
 }
