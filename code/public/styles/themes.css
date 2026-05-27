@@ -1,6 +1,8 @@
 :root {
     /* surfaces */
     --background-color: light-dark(#faf7f9, #12090f);
+    --background-color-reverse-dark: light-dark(rgba(0, 0, 0, 0), #faf7f9);
+    --background-color-reverse-light: light-dark(#12090f, rgba(255, 255, 255, 0));
     --surface-color:    light-dark(#ffffff,  #1e0f18);
     --card-color:       light-dark(#fff9fb,  #271220);
 

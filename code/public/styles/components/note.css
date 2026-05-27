@@ -1,14 +1,8 @@
-.note-filter-bar {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    column-gap: 10px;
-}
-
 .note-container {
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 10px;
+    min-width: 430px;
 }
 
 .note {
