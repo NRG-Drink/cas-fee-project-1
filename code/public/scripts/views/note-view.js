@@ -65,6 +65,9 @@ export class NoteView {
     }   
     
     createNoteHtml = (note) => {
+        const importance = note.importance > 0
+            ? '🔥'.repeat(note.importance)
+            : '🧊';
         const checkbox = note.completed
             ? `<img class="checked-img" src="./images/components/checkbox-checked.png" alt="checked">`
             : `<img class="unchecked-img" src="./images/components/checkbox-unchecked.png" alt="unchecked">`;
@@ -76,11 +79,11 @@ export class NoteView {
                     <label for="note-${note.id}-checkbox">${checkbox}</label>
                 </div>
 
-                <details class="note-data">
+                <details class="note-data" ${note.open ? 'open' : ''}>
                     <summary class="note-header">
                         <div class="note-due-date">${note.dueDate}</div>
                         <div class="note-title">${note.title}</div>
-                        <div class="note-importance">${'🔥'.repeat(note.importance)}</div>
+                        <div class="note-importance">${importance}</div>
                     </summary>
 
                     <div class="note-details">

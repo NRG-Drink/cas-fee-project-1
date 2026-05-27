@@ -1,4 +1,4 @@
-export class SortView {
+export class ButtonSortView {
     constructor() {
     }
 

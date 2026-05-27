@@ -1,5 +1,5 @@
 import { SortService } from '../services/sort-service.js';
-import { SortView } from '../views/sort-view.js';
+import { ButtonSortView } from '../views/button-sort-view.js';
 import { NoteService } from '../services/note-service.js';
 
 export class SortController {
@@ -14,7 +14,6 @@ export class SortController {
         this.sortDueDate = document.querySelector('#btn_sort-due-date');
         this.sortCreationDate = document.querySelector('#btn_sort-creation-date');
         this.sortImportance = document.querySelector('#btn_sort-importance');
-
     }
 
     withNoteSortCallback = (callback) => {
