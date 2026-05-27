@@ -10,11 +10,7 @@ export class NoteEditController {
         this.saveButton = document.querySelector('#btn_save-note');
         this.cancelButton = document.querySelector('#btn_cancel-note');
 
-        this.isComplete = document.querySelector('#edit-note-checkbox');
-        this.dueDate = document.querySelector('#edit-note-due-date');
-        this.title = document.querySelector('#edit-note-title');
-        this.content = document.querySelector('#edit-note-content');
-        this.importance = document.querySelector('.star-rating input[name="rating"]:checked');
+        this.form = document.querySelector('#note-edit-form');
     }
 
     withNoteSaveCallback(callback) {
@@ -26,32 +22,15 @@ export class NoteEditController {
         this.noteEditView.hide();
     }
 
-    setNoteData(note) {
-        this.editNoteId = note.id;
-        this.isComplete.checked = note.completed;
-        this.title.value = note.title;
-        this.content.value = note.content;
-        this.dueDate.value = note.dueDate;
-        const ratingValue = note.importance;
-        if (ratingValue) {
-            const ratingInput = document.querySelector(`.star-rating input[name="rating"][value="${ratingValue}"]`);
-            if (ratingInput) {
-                ratingInput.checked = true;
-            }
-        } else {
-            const ratingInputs = document.querySelectorAll('.star-rating input[name="rating"]');
-            ratingInputs.forEach(input => input.checked = false);
-        }
-    }
-
     getNoteData() {
+        const formData = new FormData(this.form);
         return new Note(
             this.editNoteId,
-            this.title.value,
-            this.content.value,
-            this.dueDate.value,
-            this.getRatingValue(),
-            this.isComplete.checked
+            formData.get('title'),
+            formData.get('content'),
+            formData.get('dueDate'),
+            formData.get('rating'),
+            formData.get('isCompleted') === 'on'
         );
     }
 
@@ -61,18 +40,28 @@ export class NoteEditController {
     }
 
     handleEditNote(note) {
-        this.setNoteData(note);
+        this.noteEditView.prefillForm(note);
         this.noteEditView.show();
     }
 
     handleCreateNewNote() {
+        // TODO: Test data. Remove when form is working.
+        this.noteEditView.prefillForm({
+            title: 'New Note',
+            dueDate: '2024-06-30',
+            content: 'Hier könnte Ihre Werbung stehen!',
+            importance: 1,
+            completed: false,
+        });
         this.editNoteId = null;
         this.noteEditView.show();
     }
 
     handleSaveNote() {
+        const noteData = this.getNoteData();
+        console.log('Saving note:', noteData);
         if (this.saveNoteCallback) {
-            this.saveNoteCallback(this.getNoteData());
+            this.saveNoteCallback(noteData);
         }
 
         this.noteEditView.hide();
@@ -83,8 +72,11 @@ export class NoteEditController {
     }
 
     addEventListeners() {
-        this.createButton?.addEventListener('click', () => this.handleCreateNewNote());
-        this.saveButton?.addEventListener('click', () => this.handleSaveNote());
-        this.cancelButton?.addEventListener('click', () => this.handleCancelEdit());
+        this.createButton.addEventListener('click', () => this.handleCreateNewNote());
+        this.form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            this.handleSaveNote();
+        });
+        this.cancelButton.addEventListener('click', () => this.handleCancelEdit());
     }
 }

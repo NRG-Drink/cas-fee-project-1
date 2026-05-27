@@ -39,9 +39,9 @@
 
 
         <section id="note-edit">
-            <div class="note note-container">
+            <form id="note-edit-form" class="note note-container">
                 <div class="note-checkbox">
-                    <input type="checkbox" id="edit-note-checkbox">
+                    <input type="checkbox" id="edit-note-checkbox" name="isCompleted">
                     <label for="edit-note-checkbox">
                         <img class="unchecked-img" src="./images/components/checkbox-unchecked.png" alt="unchecked">
                         <img class="checked-img" src="./images/components/checkbox-checked.png" alt="checked">
@@ -50,8 +50,8 @@
 
                 <div class="note-data">
                     <div class="note-header">
-                        <input type="date" id="edit-note-due-date" />
-                        <input type="text" id="edit-note-title" placeholder="Title" />
+                        <input type="date" id="edit-note-due-date" name="dueDate" required/>
+                        <input type="text" id="edit-note-title" name="title" placeholder="Title" required />
                         <fieldset class="star-rating">
                             <input type="radio" id="star5" name="rating" value="5" />
                             <label for="star5" title="Herausragend">🔥</label>
@@ -74,12 +74,12 @@
                     </div>
 
                     <div class="note-details">
-                        <textarea id="edit-note-content" placeholder="Content"></textarea>
+                        <textarea id="edit-note-content" name="content" placeholder="Content"></textarea>
                         <button id="btn_cancel-note" class="icon">❌</button>
                         <button id="btn_save-note" class="icon">💾</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </section>
 
         <section id="note-view">

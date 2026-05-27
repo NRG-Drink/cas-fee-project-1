@@ -58,14 +58,11 @@ btnCreateNote.addEventListener('click', () => {
 });
 
 btnCancelNote.addEventListener('click', () => {
-    console.log('Cancel Note button clicked');
     hideCreateNoteForm();
 });
 
 btnSaveNote.addEventListener('click', () => {
-    console.log('Save Note button clicked');
     const newNote = {
-        // id: notes.length + 1, // Simple ID generation based on current notes count
         id: editNoteId ? editNoteId : notes.length + 1, // Use existing ID for edits, or generate new ID for new notes
         createdAt: new Date().toISOString(),
         completed: createCheckbox.checked,
@@ -79,7 +76,6 @@ btnSaveNote.addEventListener('click', () => {
     if (editNoteId !== null) {
         updateNote(editNoteId, newNote);
     } else {
-        console.log('New Note Data:', newNote);
         addNote(newNote);
     }
 

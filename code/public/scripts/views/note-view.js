@@ -50,9 +50,11 @@ export class NoteView {
         }
     }
 
-    renderNotes = (notes) => {
+    renderNotes = (notes, isScrollEnabled = false) => {
+        this.disableScroll();
         this.noteView.innerHTML = ''; // Clear existing notes
         notes.forEach(this.createAndAddNote);
+        this.enableScroll();
     }
 
     createNoteElement = (note) => {
