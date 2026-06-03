@@ -8,7 +8,7 @@
 @import "./components/rating.css";
 
 :root {
-    --rating-letter-spacing: -60%;
+    --rating-letter-spacing: -45%;
     --rating-font-size: 1.1rem;
 
     --checkbox-size: 24px;
@@ -23,6 +23,7 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     padding: 10px;
+    padding: 0;
     height: 100%;
 }
 
