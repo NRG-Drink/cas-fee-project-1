@@ -3,15 +3,17 @@
 @import "./components/button.css";
 @import "./components/menu.css";
 @import "./components/note.css";
-@import "./components/note-edit.css";
 @import "./components/checkbox.css";
 @import "./components/rating.css";
 
 :root {
     --max-content-width: 1000px;
 
-    --rating-letter-spacing: -45%;
+    --rating-letter-spacing: -0.29em;
+    --rating-letter-spacing-first: -0.2em;
     --rating-font-size: 1.1rem;
+
+    --note-importance-spacing: -0.45em;
 
     --checkbox-size: 24px;
 }

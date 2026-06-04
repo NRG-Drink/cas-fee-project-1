@@ -15,7 +15,8 @@
 
 /* Style the star labels */
 .star-rating label {
-    letter-spacing: var(--rating-letter-spacing);
+    margin-left: var(--rating-letter-spacing);
+    margin-right: var(--rating-letter-spacing);
     font-size: var(--rating-font-size);
     cursor: pointer;
     transition: opacity 0.4s ease;
@@ -23,7 +24,8 @@
 
     /* Adjust spacing for the 🧊 */
     &:last-child {
-        letter-spacing: calc(var(--rating-letter-spacing) / 1.2);
+        margin-left: var(--rating-letter-spacing-first);
+        margin-right: var(--rating-letter-spacing-first);
     }
 }
 
