@@ -6,6 +6,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: border-color var(--transition-colors);
 }
 
 .footer-links {
@@ -19,10 +20,12 @@ footer {
     color: var(--text-color);
     display: flex;
     align-items: center;
+    transition: color var(--transition-text);
 
     & img {
         margin-right: 5px;
         height: 1.5rem;
         background-color: var(--background-color-reverse-dark);
+        transition: background-color var(--transition-colors);
     }
 }
