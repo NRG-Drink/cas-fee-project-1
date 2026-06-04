@@ -8,6 +8,8 @@
 @import "./components/rating.css";
 
 :root {
+    --max-content-width: 1000px;
+
     --rating-letter-spacing: -45%;
     --rating-font-size: 1.1rem;
 
@@ -28,16 +30,16 @@ body {
 }
 
 header {
-    max-width: 1000px;
+    max-width: var(--max-content-width);
 }
 
 main {
     width: 100%;
-    max-width: 1000px;
+    max-width: var(--max-content-width);
 }
 
 footer {
-    max-width: 1000px;
+    max-width: var(--max-content-width);
 }
 
 .header {
