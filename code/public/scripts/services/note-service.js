@@ -19,7 +19,7 @@ export class NoteService {
     }
 
     addNote = (note) => {
-        note.id = this.notes.length + 1;
+        note.id = Math.max(...this.notes.map(n => n.id), 0) + 1; // Generate unique ID based on existing notes
         this.notes.push(note);
     }
 
@@ -31,7 +31,7 @@ export class NoteService {
     }
 
     removeNote = (noteId) => {
-        this.notes = this.notes.filter(note => note.id !== noteId);
+        this.notes = this.notes.filter(note => note.id !== parseInt(noteId, 10));
     }
 
     sortNotes = (sortFunction, direction) => {
