@@ -56,7 +56,7 @@ export class FilterService {
         if (key === 'isCompleted') {
             filterFunction = (note) => note.completed;
         } else if (key === 'isOverdue') {
-            filterFunction = (note) => new Date(note.dueDate) < new Date();
+            filterFunction = (note) => new Date(note.dueDate) < new Date().setHours(0, 0, 0, 0);
         } else {
             filterFunction = (e) => true; // No filtering by default.
         }
