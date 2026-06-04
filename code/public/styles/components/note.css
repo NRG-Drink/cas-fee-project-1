@@ -57,5 +57,17 @@
 
 .note-importance {
     font-size: var(--rating-font-size);
-    letter-spacing: var(--rating-letter-spacing);
+    letter-spacing: var(--note-importance-spacing);
+}
+
+/* Temporary Stylings */
+.note-highlight {
+    box-shadow: 0 0 10px 3px var(--highlight-color);
+    transition: box-shadow 0.2s ease;
+}
+
+.note-delete {
+    opacity: 0;
+    transform: scale(0.3, 0.3);
+    transition: opacity 0.3s linear, transform 0.3s ease;
 }

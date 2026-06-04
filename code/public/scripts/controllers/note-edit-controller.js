@@ -7,7 +7,6 @@ export class NoteEditController {
         this.noteEditView = noteEditView;
 
         this.createButton = document.querySelector('#btn_create-note');
-        this.saveButton = document.querySelector('#btn_save-note');
         this.cancelButton = document.querySelector('#btn_cancel-note');
 
         this.form = document.querySelector('#note-edit-form');
@@ -40,12 +39,14 @@ export class NoteEditController {
     }
 
     handleEditNote(note) {
+        this.editNoteId = note.id;
         this.noteEditView.prefillForm(note);
         this.noteEditView.show();
     }
 
     handleCreateNewNote() {
         // TODO: Test data. Remove when form is working.
+        ///// Test data /////
         this.noteEditView.prefillForm({
             title: 'New Note',
             dueDate: new Date().toISOString().split('T')[0], // Set to today's date.
@@ -53,6 +54,7 @@ export class NoteEditController {
             importance: 1,
             completed: false,
         });
+        ///// Test data /////
         this.editNoteId = null;
         this.noteEditView.show();
     }
@@ -73,6 +75,7 @@ export class NoteEditController {
 
     addEventListeners() {
         this.createButton.addEventListener('click', () => this.handleCreateNewNote());
+        // Save button
         this.form.addEventListener('submit', (event) => {
             event.preventDefault();
             this.handleSaveNote();

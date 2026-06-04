@@ -9,14 +9,6 @@ export class NoteEditView {
         this.importance = document.querySelector('.star-rating input[name="rating"]:checked');
     }
 
-    withSaveButton(button) {
-        this.saveButton = button;
-    }
-
-    withCancelButton(button) {
-        this.cancelButton = button;
-    }
-
     show() {
         this.editNote.style.display = 'block';
         this.editNote.scrollIntoView({ behavior: 'smooth' });

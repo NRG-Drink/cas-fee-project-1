@@ -20,6 +20,7 @@ export class NoteController {
         this.addEventListeners();
         this.noteView.renderNotes(this.noteService.getNotes());
         this.noteView.enableScroll();
+        this.noteView.enableHighlights();
     }
 
     handleSaveNote = (note) => {
@@ -47,7 +48,7 @@ export class NoteController {
         this.noteList.addEventListener('click', this.handleNoteClick);
     }
 
-    handleNoteClick = (event) => {
+    handleNoteClick = async (event) => {
         const noteElement = event.target.closest('.note-container');
         if (!noteElement) {
             // Clicked on non-note element.
@@ -65,11 +66,12 @@ export class NoteController {
         console.log(action, 'note id', noteId);
 
         if (action === 'edit') {
+            console.log('Editing note:', note);
             this.noteEditController.handleEditNote(note);
         }
         else if (action === 'delete') {
             this.noteService.removeNote(noteId);
-            this.noteView.removeNote(noteId);
+            await this.noteView.removeNote(noteId);
         }
     }
 }

@@ -71,18 +71,5 @@ export class SortService {
         return entry.value === 'descending'
             ? (a, b) => sortFunction(b, a)
             : sortFunction;
-
-        // switch (key) {
-        //     case 'title':
-        //         return (a, b) => a.title.localeCompare(b.title);
-        //     case 'dueDate':
-        //         return (a, b) => new Date(a.dueDate) - new Date(b.dueDate);
-        //     case 'createdAt':
-        //         return (a, b) => new Date(a.createdAt) - new Date(b.createdAt);
-        //     case 'importance':
-        //         return (a, b) => a.importance - b.importance;
-        //     default:
-        //         return (a, b) => a.id - b.id; // Default sorting (by ID or creation order).
-        // }
     }
 }

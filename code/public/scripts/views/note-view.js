@@ -1,15 +1,24 @@
 export class NoteView {
     constructor() {
         this.isScrollEnabled = false;
+        this.isHighlightEnabled = false;
         this.noteView = document.querySelector('#note-view');
     }
 
-    disableScroll = (noteElement) => {
+    disableScroll = () => {
         this.isScrollEnabled = false;
     }
 
-    enableScroll = (noteElement) => {
+    enableScroll = () => {
         this.isScrollEnabled = true;
+    }
+
+    enableHighlights = () => {
+        this.isHighlightEnabled = true;
+    }
+
+    disableHighlights = () => {
+        this.isHighlightEnabled = false;
     }
 
     addNote = (noteElement) => {
@@ -19,12 +28,13 @@ export class NoteView {
         }
     }
 
-    createAndAddNote = (note) => {
+    createAndAddNote = async (note) => {
         const newNoteElement = this.createNoteElement(note);
         this.addNote(newNoteElement);
+        await this.setNoteHighlight(note.id, 'note-highlight', 800, 300);
     }
 
-    updateNote = (noteId, updatedNote) => {
+    updateNote = async (noteId, updatedNote) => {
         const noteElement = this.noteView.querySelector(`[data-note-id="${noteId}"]`);
         if (noteElement) {
             const updatedNoteElement = this.createNoteElement(updatedNote);
@@ -33,11 +43,14 @@ export class NoteView {
             }
 
             noteElement.replaceWith(updatedNoteElement);
+            await this.setNoteHighlight(noteId, 'note-highlight', 600, 200);
         }
     }
 
-    removeNote = (noteId) => {
+    removeNote = async (noteId) => {
         const noteElement = this.noteView.querySelector(`[data-note-id="${noteId}"]`);
+        await this.setNoteHighlight(noteId, 'note-delete', 300, 0);
+
         if (noteElement) {
             this.noteView.removeChild(noteElement);
         }
@@ -50,11 +63,30 @@ export class NoteView {
         }
     }
 
+    delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    setNoteHighlight = async (noteId, highlightClass, durationMs = 800, startDelayMs = 400) => {
+        if (!this.isHighlightEnabled) {
+            return;
+        }
+
+        const startPromise = this.delay(startDelayMs);
+        const noteElement = this.noteView.querySelector(`[data-note-id="${noteId}"]`);
+        await startPromise;
+        if (noteElement) {
+            noteElement.classList.add(highlightClass);
+            await this.delay(durationMs);
+            noteElement.classList.remove(highlightClass);
+        }
+    }
+
     renderNotes = (notes, isScrollEnabled = false) => {
         this.disableScroll();
+        this.disableHighlights();
         this.noteView.innerHTML = ''; // Clear existing notes
         notes.forEach(this.createAndAddNote);
         this.enableScroll();
+        this.enableHighlights();
     }
 
     createNoteElement = (note) => {
@@ -62,8 +94,8 @@ export class NoteView {
         template.innerHTML = this.createNoteHtml(note).trim();
         const noteElement = template.content.firstChild;
         return noteElement;
-    }   
-    
+    }
+
     createNoteHtml = (note) => {
         const importance = note.importance > 0
             ? '🔥'.repeat(note.importance)

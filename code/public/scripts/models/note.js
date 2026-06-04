@@ -6,7 +6,7 @@ export class Note {
         this.dueDate = dueDate;
         this.importance = importance;
         this.completed = completed;
-        this.createdDate = new Date().toISOString();
+        this.createdAt = new Date().toISOString();
         this.open = false; // New property to track if the note is open or closed
     }
 }
