@@ -1,0 +1,49 @@
+
+name: ci-cd.setup-test
+
+on:
+  # Allows manual triggering of the workflow from the GitHub Actions tab.
+  workflow_dispatch:
+  # Triggers on PRs that are opened or updated, but only if they affect certain paths (e.g., code changes, workflow changes).
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    paths:
+      - '.github/workflows/**'
+      - 'code/**'
+      - '!**.md'
+      - '!docs/**'
+
+jobs:
+  build-test:
+    # Can run on slim because no parallel execution happening anyway.
+    runs-on: ubuntu-slim
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24' # Specify your Node.js version
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run tests
+      - name: Run tests
+        run: npm run test:coverage
+
+      # Step 5: Upload coverage report
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-report
+          path: coverage # Adjust this path if your coverage output is elsewhere
