@@ -15,7 +15,9 @@
 <body>
     <header>
         <div class="header">
-            <img src="images/ost-logo.png" alt="Beispielbild" class="header-image" />
+            <a href="https://www.ost.ch" target="_blank" rel="noopener noreferrer">
+                <img src="images/ost-logo.png" alt="Beispielbild" class="header-image" />
+            </a>
             <h2>CAS FEE Project 1 - Note App</h2>
         </div>
     </header>
@@ -27,20 +29,24 @@
                 <button id="btn_theme-toggle">🌞/🌚</button>
             </div>
 
-            <div class="note-filter-bar">
+            <div id="menu-filters" class="menu-bar">
+                <button id="btn_filter-completed">Filter Completed</button>
+                <button id="btn_filter-overdue">Filter Overdue</button>
+            </div>
+            <div id="menu-sorts" class="menu-bar">
+                <button id="btn_sort-complete">Sort by Complete</button>
                 <button id="btn_sort-title">Sort by Title</button>
                 <button id="btn_sort-due-date">Sort by Due Date</button>
                 <button id="btn_sort-creation-date">Sort by Creation Date</button>
                 <button id="btn_sort-importance">Sort by Importance</button>
-                <button id="btn_filter-completed">Filter Completed</button>
             </div>
         </section>
 
 
         <section id="note-edit">
-            <div class="note note-container">
+            <form id="note-edit-form" class="note note-container">
                 <div class="note-checkbox">
-                    <input type="checkbox" id="edit-note-checkbox">
+                    <input type="checkbox" id="edit-note-checkbox" name="isCompleted">
                     <label for="edit-note-checkbox">
                         <img class="unchecked-img" src="./images/components/checkbox-unchecked.png" alt="unchecked">
                         <img class="checked-img" src="./images/components/checkbox-checked.png" alt="checked">
@@ -49,8 +55,8 @@
 
                 <div class="note-data">
                     <div class="note-header">
-                        <input type="date" id="edit-note-due-date" />
-                        <input type="text" id="edit-note-title" placeholder="Title" />
+                        <input type="date" id="edit-note-due-date" name="dueDate" required />
+                        <input type="text" id="edit-note-title" name="title" placeholder="Title" required />
                         <fieldset class="star-rating">
                             <input type="radio" id="star5" name="rating" value="5" />
                             <label for="star5" title="Herausragend">🔥</label>
@@ -66,16 +72,19 @@
 
                             <input type="radio" id="star1" name="rating" value="1" />
                             <label for="star1" title="Unwichtig">🔥</label>
+
+                            <input type="radio" id="star0" name="rating" value="0" />
+                            <label for="star0" title="Keine">🧊</label>
                         </fieldset>
                     </div>
 
                     <div class="note-details">
-                        <textarea id="edit-note-content" placeholder="Content"></textarea>
-                        <button id="btn_cancel-note" class="icon">❌</button>
-                        <button id="btn_save-note" class="icon">💾</button>
+                        <textarea id="edit-note-content" name="content" placeholder="Content"></textarea>
+                        <button id="btn_cancel-note" type="button" class="icon">❌</button>
+                        <button id="btn_save-note" type="submit" class="icon">💾</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </section>
 
         <section id="note-view">
@@ -120,6 +129,21 @@
     </main>
 
     <footer>
+        <div class="footer-links">
+            <div class="footer-link">
+                <img class="footer-icon" src="images/github-logo.png" alt="GitHub Logo" >
+                <a class="footer-link" href="https://github.com/NRG-Drink/cas-fee-project-1" target="_blank" rel="noopener noreferrer">
+                    GitHub Repository
+                </a>
+            </div>
+            <div class="footer-link">
+                <img class="footer-icon" src="https://avatars.githubusercontent.com/u/123409068?v=4"
+                    alt="Developer Image">
+                <a href="https://github.com/NRG-Drink" target="_blank" rel="noopener noreferrer">
+                    Developer
+                </a>
+            </div>
+        </div>
     </footer>
 </body>
 

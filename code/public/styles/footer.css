@@ -1,0 +1,31 @@
+footer {
+    margin-top: 20px;
+    padding-top: 10px;
+    width: 100%;
+    border-top: 2px solid var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: border-color var(--transition-colors);
+}
+
+.footer-links {
+    display: inline-grid;
+    grid-auto-rows: auto;
+    row-gap: 5px;
+    justify-items: flex-start;
+}
+
+.footer-link {
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    transition: color var(--transition-text);
+
+    & img {
+        margin-right: 5px;
+        height: 1.5rem;
+        background-color: var(--background-color-reverse-dark);
+        transition: background-color var(--transition-colors);
+    }
+}

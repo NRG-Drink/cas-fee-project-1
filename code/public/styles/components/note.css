@@ -1,18 +1,13 @@
-.note-filter-bar {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-    column-gap: 10px;
-}
-
 .note-container {
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 10px;
+    min-width: 430px;
 }
 
 .note {
     background-color: var(--card-color);
+    color: var(--text-color);
     margin-top: 10px;
     padding: 10px 12px;
 
@@ -20,7 +15,10 @@
     border-left: 4px solid var(--card-border-color);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    transition: box-shadow 0.2s ease;
+    transition: 
+        box-shadow 0.2s ease,
+        background-color var(--transition-colors),
+        color var(--transition-text);
 }
 
 .note:hover {
@@ -55,7 +53,6 @@
 .note-text {
     display: flex;
     font-size: 1.1rem;
-    color: var(--text-color);
     border-top: 1px solid var(--card-border-color);
     padding-top: 8px;
     margin-right: 5px;
@@ -63,5 +60,17 @@
 
 .note-importance {
     font-size: var(--rating-font-size);
-    letter-spacing: var(--rating-letter-spacing);
+    letter-spacing: var(--note-importance-spacing);
+}
+
+/* Temporary Stylings */
+.note-highlight {
+    box-shadow: 0 0 10px 3px var(--highlight-color);
+    transition: box-shadow 0.2s ease;
+}
+
+.note-delete {
+    opacity: 0;
+    transform: scale(0.3, 0.3);
+    transition: opacity 0.3s linear, transform 0.3s ease;
 }

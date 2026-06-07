@@ -1,6 +1,8 @@
 :root {
     /* surfaces */
     --background-color: light-dark(#faf7f9, #12090f);
+    --background-color-reverse-dark: light-dark(rgba(0, 0, 0, 0), #faf7f9);
+    --background-color-reverse-light: light-dark(#12090f, rgba(255, 255, 255, 0));
     --surface-color:    light-dark(#ffffff,  #1e0f18);
     --card-color:       light-dark(#fff9fb,  #271220);
 
@@ -29,6 +31,10 @@
     --shadow-color: light-dark(rgba(80, 10, 55, 0.1), rgba(43, 42, 42, 0.6));
     --shadow:       4px 4px 4px 1px var(--shadow-color);
     --glow-color:   light-dark(rgba(140, 25, 95, 0.28), rgba(212, 94, 165, 0.4));
+
+    --t-time: 1s;
+    --transition-colors: calc(var(--t-time) * 1.00) ease;
+    --transition-text: calc(var(--t-time) * 0.30) ease;
 }
 
 html[data-theme="light"] {
@@ -37,10 +43,4 @@ html[data-theme="light"] {
 
 html[data-theme="dark"] {
     color-scheme: dark;
-}
-
-body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    padding: 10px;
 }

@@ -1,14 +1,19 @@
 @import "./themes.css";
+@import "./footer.css";
 @import "./components/button.css";
 @import "./components/menu.css";
 @import "./components/note.css";
-@import "./components/note-edit.css";
 @import "./components/checkbox.css";
 @import "./components/rating.css";
 
 :root {
-    --rating-letter-spacing: -8px;
-    --rating-font-size: 1.15rem;
+    --max-content-width: 1000px;
+
+    --rating-letter-spacing: -0.29em;
+    --rating-letter-spacing-first: -0.2em;
+    --rating-font-size: 1.1rem;
+
+    --note-importance-spacing: -0.45em;
 
     --checkbox-size: 24px;
 }
@@ -22,11 +27,24 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     padding: 10px;
+    height: 100%;
+
+    transition:
+        background-color var(--transition-colors),
+        color var(--transition-text);
+}
+
+header {
+    max-width: var(--max-content-width);
 }
 
 main {
     width: 100%;
-    max-width: 1000px;
+    max-width: var(--max-content-width);
+}
+
+footer {
+    max-width: var(--max-content-width);
 }
 
 .header {
