@@ -1,9 +1,9 @@
 import { Theme } from '../models/theme.js';
 
 export class ThemeService {
-    constructor() {
+    constructor(themeValues = null) {
         this.index = 0;
-        this.themes = [
+        this.themes = themeValues ?? [
             new Theme('Light', 'light', '🌞️'),
             new Theme('Dark', 'dark', '🌚'),
         ];
