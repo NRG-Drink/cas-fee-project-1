@@ -27,19 +27,11 @@ export class NoteController {
     getAllNotes = async (req, res) => {
         try {
             // Filter by request parameters if provided
-            let filter = {};
-            const isCompleted = req.query.completed === 'true' 
-                ? true 
-                : req.query.completed === 'false' 
-                    ? false 
-                    : null;
-            if (isCompleted !== null) {
-                filter = { 'completed': isCompleted };
-            }
+            const filter = this.parseFilterQuery(req.query.filter);
 
             // Sort by request query parameters if provided, otherwise default to sorting by title
             const sortField = req.query.sortBy || 'title';
-            const sortOrder = req.query.sortOrder === 'desc' ? -1 : 1;
+            const sortOrder = req.query.sortOrder === 'desc' || req.query.sortOrder === 'descending' ? -1 : 1;
 
             const notes = await this.db
                 .findAsync(filter)
@@ -78,17 +70,17 @@ export class NoteController {
         try {
             const noteId = req.params.id;
             const { _id, ...fields } = req.body;
-            
+
             const updatedCount = await this.db.updateAsync(
                 { _id: noteId },
                 { $set: fields }
             );
-            
+
             if (updatedCount === 0) {
                 res.status(404).json({ message: "Note not found" });
                 return;
             }
-            
+
             // Retrieve the updated note to return it
             const note = await this.db.findOneAsync({ _id: noteId });
             res.json(note);
@@ -100,18 +92,45 @@ export class NoteController {
     deleteNote = async (req, res) => {
         try {
             const noteId = req.params.id;
-            
+
             const deletedCount = await this.db.removeAsync({ _id: noteId });
-            
+
             if (deletedCount === 0) {
                 res.status(404).json({ message: "Note not found" });
                 return;
             }
-            
+
             res.status(200).json({ message: "Note deleted" });
         } catch (error) {
             res.status(500).json({ message: "Error deleting note", error: error.message });
         }
+    }
+
+    parseFilterQuery = (filterQuery) => {
+        let filter = {};
+        if (!filterQuery) {
+            return filter;
+        }
+
+        const matched = filterQuery.matchAll(/'([^$()]*)'([^()]*)'([^$()]*)'/gm);
+        for (const match of matched) {
+            if (match) {
+                const [_, key, operator, value] = match;
+                let typedValue = value;
+                // Convert to boolean if the value is 'true' or 'false'
+                if (value === 'true' || value === 'false') {
+                    typedValue = value === 'true';
+                }
+
+                if (operator) {
+                    filter[key] = { [operator]: typedValue };
+                } else {
+                    filter[key] = typedValue;
+                }
+            }
+        }
+
+        return filter;
     }
 }
 
