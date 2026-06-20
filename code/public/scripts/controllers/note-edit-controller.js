@@ -60,11 +60,13 @@ export class NoteEditController {
     handleSaveNote = async () => {
         const noteData = this.getNoteData();
         console.log('Saving note:', noteData);
+
+        // Hide first to make scroll on callback work properly.
+        this.noteEditView.hide();
+
         if (this.saveNoteCallback) {
             await this.saveNoteCallback(noteData);
         }
-
-        this.noteEditView.hide();
     }
 
     handleCancelEdit = () => {

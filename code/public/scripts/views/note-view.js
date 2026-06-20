@@ -31,18 +31,18 @@ export class NoteView {
     createAndAddNote = async (note) => {
         const newNoteElement = this.createNoteElement(note);
         this.addNote(newNoteElement);
-        await this.setNoteHighlight(note.id, 'note-highlight', 800, 300);
+        await this.setNoteHighlight(note._id, 'note-highlight', 800, 300);
     }
 
     updateNote = async (noteId, updatedNote) => {
         const noteElement = this.noteView.querySelector(`[data-note-id="${noteId}"]`);
         if (noteElement) {
             const updatedNoteElement = this.createNoteElement(updatedNote);
+            noteElement.replaceWith(updatedNoteElement);
             if (this.isScrollEnabled) {
-                noteElement.scrollIntoView({ behavior: 'smooth' });
+                updatedNoteElement.scrollIntoView({ behavior: 'smooth' });
             }
 
-            noteElement.replaceWith(updatedNoteElement);
             await this.setNoteHighlight(noteId, 'note-highlight', 600, 200);
         }
     }
