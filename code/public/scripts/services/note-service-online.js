@@ -19,19 +19,19 @@ export class NoteServiceOnline {
 
         try {
             // return fetch(url, options).then(response => response.json());
-            console.log(`SEND: ${method} / ${url} data: ${ JSON.stringify(data) }`);
+            console.log(`SEND: ${method} / ${url} data: ${JSON.stringify(data)}`);
             const response = await fetch(url, options);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const jsonResponse = await response.json();
-            console.log(`RECEIVE: ${method} / ${url} data: ${ JSON.stringify(jsonResponse) }`);
+            console.log(`RECEIVE: ${method} / ${url} data: ${JSON.stringify(jsonResponse).slice(0, 100)}...`); // Log only the first 100 characters of the response for brevity.
             return jsonResponse;
         } catch (error) {
             console.error(`Error during HTTP request to ${url}:`, error);
-            // throw error;
-            return null;
+            throw error;
+            // return null;
         }
     }
 
@@ -48,13 +48,24 @@ export class NoteServiceOnline {
      */
     getNotes = async () => {
         // return this.http('GET', '/notes');
-        const notes = await this.http('GET', `/notes`) ?? [];
-        return notes
-            .filter(this.filterFunction)
-            .sort(this.sortFunction);
-        // return this.notes;
-        // .filter(this.filterFunction)
-        // .sort(this.sortFunction);
+        let route = '/notes';
+        let queries = [];
+
+        if (this.filterFunction && this.filterFunction.length > 2) {
+            queries.push(`filter=${this.filterFunction}`);
+        }
+
+        if (this.sortFunction && this.sortFunction.sortBy) {
+            queries.push(`sortBy=${this.sortFunction.sortBy}`);
+            queries.push(`sortOrder=${this.sortFunction.sortOrder}`);
+        }
+
+        if (queries.length > 0) {
+            route += `?${queries.join('&')}`;
+        }
+
+        const notes = await this.http('GET', route) ?? [];
+        return notes;
     }
 
     /**
@@ -67,7 +78,7 @@ export class NoteServiceOnline {
             response.title,
             response.content,
             response.dueDate,
-            response.rating,
+            response.importance,
             response.completed
         );
     }
