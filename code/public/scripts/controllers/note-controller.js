@@ -16,36 +16,38 @@ export class NoteController {
         this.noteList = document.querySelector('#note-view');
     }
 
-    initialize() {
+    initialize = async () => {
         this.addEventListeners();
-        this.noteView.renderNotes(this.noteService.getNotes());
+        this.noteView.renderNotes(await this.noteService.getNotes());
         this.noteView.enableScroll();
         this.noteView.enableHighlights();
     }
 
-    handleSaveNote = (note) => {
-        if (note.id) {
-            this.noteService.updateNote(note);
-            this.noteView.updateNote(note.id, note);
+    handleSaveNote = async (note) => {
+        if (note._id) {
+            await this.noteService.updateNote(note);
+            this.noteView.updateNote(note._id, note);
             return;
         }
 
-        this.noteService.addNote(note);
-        this.noteView.createAndAddNote(note);
+        const newNote = await this.noteService.addNote(note);
+        this.noteView.createAndAddNote(newNote);
     }
 
-    handleFilterNotes = (filterFunction) => {
+    handleFilterNotes = async (filterFunction) => {
         this.noteService.filterNotes(filterFunction);
-        this.noteView.renderNotes(this.noteService.getNotes());
+        const notes = await this.noteService.getNotes();
+        this.noteView.renderNotes(notes);
     }
 
-    handleSortNotes = (sortFunction) => {
+    handleSortNotes = async (sortFunction) => {
         this.noteService.sortNotes(sortFunction);
-        this.noteView.renderNotes(this.noteService.getNotes());
+        const notes = await this.noteService.getNotes();
+        this.noteView.renderNotes(notes);
     }
 
     addEventListeners() {
-        this.noteList.addEventListener('click', this.handleNoteClick);
+        this.noteList.addEventListener('click', async (e) => this.handleNoteClick(e));
     }
 
     handleNoteClick = async (event) => {
@@ -62,16 +64,20 @@ export class NoteController {
         }
 
         const noteId = noteElement.dataset.noteId;
-        const note = this.noteService.getNoteById(noteId);
         console.log(action, 'note id', noteId);
-
+        
         if (action === 'edit') {
+            const note = await this.noteService.getNoteById(noteId);
             console.log('Editing note:', note);
-            this.noteEditController.handleEditNote(note);
+            await this.noteEditController.handleEditNote(note);
         }
         else if (action === 'delete') {
-            this.noteService.removeNote(noteId);
-            await this.noteView.removeNote(noteId);
+            try {
+                await this.noteService.removeNote(noteId);
+                await this.noteView.removeNote(noteId);
+            } catch (error) {
+                console.error('Error deleting note:', error);
+            }
         }
     }
 }

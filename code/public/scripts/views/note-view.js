@@ -56,13 +56,6 @@ export class NoteView {
         }
     }
 
-    setNoteOpenStates = (noteContainers) => {
-        for (const note of noteContainers) {
-            const id = note.dataset.noteId;
-            const isOpen = note.querySelector('details').open;
-        }
-    }
-
     delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     setNoteHighlight = async (noteId, highlightClass, durationMs = 800, startDelayMs = 400) => {
@@ -80,7 +73,7 @@ export class NoteView {
         }
     }
 
-    renderNotes = (notes, isScrollEnabled = false) => {
+    renderNotes = (notes) => {
         this.disableScroll();
         this.disableHighlights();
         this.noteView.innerHTML = ''; // Clear existing notes
@@ -103,17 +96,18 @@ export class NoteView {
         const checkbox = note.completed
             ? `<img class="checked-img" src="./images/components/checkbox-checked.png" alt="checked">`
             : `<img class="unchecked-img" src="./images/components/checkbox-unchecked.png" alt="unchecked">`;
+        const displayDueDate = new Date(note.dueDate ?? new Date('2000-01-01')).toISOString().split('T')[0];
         return `
-            <div class="note note-container" data-note-id="${note.id}">
+            <div class="note note-container" data-note-id="${note._id}">
 
                 <div class="note-checkbox">
-                    <input type="checkbox" id="note-${note.id}-checkbox" ${note.completed ? 'checked' : ''} disabled>
-                    <label for="note-${note.id}-checkbox">${checkbox}</label>
+                    <input type="checkbox" id="note-${note._id}-checkbox" ${note.completed ? 'checked' : ''} disabled>
+                    <label for="note-${note._id}-checkbox">${checkbox}</label>
                 </div>
 
                 <details class="note-data" ${note.open ? 'open' : ''}>
                     <summary class="note-header">
-                        <div class="note-due-date">${note.dueDate}</div>
+                        <div class="note-due-date">${displayDueDate}</div>
                         <div class="note-title">${note.title}</div>
                         <div class="note-importance">${importance}</div>
                     </summary>
