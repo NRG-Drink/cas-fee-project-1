@@ -50,7 +50,7 @@ export class SortService {
     getSortFunction = (key) => {
         const entry = this.getCurrentSortValue(key);
         if (entry.value === 'neutral') {
-            return (a, b) => a.id - b.id; // Default sorting (by ID or creation order).
+            return (a, b) => a._id - b._id; // Default sorting (by ID or creation order).
         }
 
         let sortFunction;
@@ -65,7 +65,7 @@ export class SortService {
         } else if (key === 'importance') {
             sortFunction = (a, b) => a.importance - b.importance;
         } else {
-            sortFunction = (a, b) => a.id - b.id; // Default sorting (by ID or creation order).
+            sortFunction = (a, b) => a._id - b._id; // Default sorting (by ID or creation order).
         }
 
         return entry.value === 'descending'

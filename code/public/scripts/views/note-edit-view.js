@@ -19,7 +19,7 @@ export class NoteEditView {
     }
 
     prefillForm(note) {
-        this.editNoteId = note.id;
+        this.editNoteId = note._id;
         this.title.value = note.title;
         this.content.value = note.content;
         this.dueDate.value = note.dueDate;

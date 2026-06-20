@@ -1,6 +1,3 @@
-import { ThemeView } from '../views/theme-view.js';
-import { ThemeService } from '../services/theme-service.js';
-
 export class ThemeController {
     constructor(view, service) {
         this.view = view;
