@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { NoteService } from '../../public/scripts/services/note-service.js';
-import { Note } from '../../public/scripts/models/note.js';
+import { NoteService } from '../../../public/scripts/services/note-service.js';
+import { Note } from '../../../public/scripts/models/note.js';
 
 describe('NoteService', () => {
     let newNote;

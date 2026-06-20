@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from 'vitest'
-import { ThemeService } from '../../public/scripts/services/theme-service.js';
-import { Theme } from '../../public/scripts/models/theme.js';
+import { ThemeService } from '../../../public/scripts/services/theme-service.js';
+import { Theme } from '../../../public/scripts/models/theme.js';
 
 
 describe('ThemeService', () => {
