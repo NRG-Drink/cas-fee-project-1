@@ -13,10 +13,10 @@ export class NoteController {
 
     seed = async () => {
         const notes = [
-            new Note(1, "AAA", "KKK", new Date('2026-06-01'), 1, false),
-            new Note(2, "BBB", "XXX", new Date('2026-06-02'), 2, true),
-            new Note(3, "CCC", "ZZZ", new Date('2026-06-03'), 3, false),
-            new Note(4, "DDD", "YYY", new Date('2026-06-04'), 4, true),
+            new Note(undefined, "AAA", "KKK", new Date('2026-06-01'), 1, false),
+            new Note(undefined, "BBB", "XXX", new Date('2026-06-02'), 2, true),
+            new Note(undefined, "CCC", "ZZZ", new Date('2026-06-03'), 3, false),
+            new Note(undefined, "DDD", "YYY", new Date('2026-06-04'), 4, true),
         ];
 
         for (const note of notes) {
@@ -66,10 +66,8 @@ export class NoteController {
 
     addNote = async (req, res) => {
         try {
-            const { title, content } = req.body;
-            const newNote = { title, content };
-            
-            const insertedNote = await this.db.insertAsync(newNote);
+            req.body._id = undefined; // Ensure that the ID is not set by the client
+            const insertedNote = await this.db.insertAsync(req.body);
             res.status(201).json(insertedNote);
         } catch (error) {
             res.status(500).json({ message: "Error creating note", error: error.message });
@@ -79,14 +77,14 @@ export class NoteController {
     updateNote = async (req, res) => {
         try {
             const noteId = req.params.id;
-            const { title, content } = req.body;
+            const { _id, ...fields } = req.body;
             
-            const updatedNote = await this.db.updateAsync(
+            const updatedCount = await this.db.updateAsync(
                 { _id: noteId },
-                { $set: { title, content } }
+                { $set: fields }
             );
             
-            if (updatedNote === 0) {
+            if (updatedCount === 0) {
                 res.status(404).json({ message: "Note not found" });
                 return;
             }
@@ -110,7 +108,7 @@ export class NoteController {
                 return;
             }
             
-            res.status(200).send();
+            res.status(200).json({ message: "Note deleted" });
         } catch (error) {
             res.status(500).json({ message: "Error deleting note", error: error.message });
         }
