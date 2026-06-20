@@ -71,7 +71,7 @@ export class NoteController {
             const noteId = req.params.id;
             const { _id, ...fields } = req.body;
 
-            const updatedCount = await this.db.updateAsync(
+            const { numAffected: updatedCount } = await this.db.updateAsync(
                 { _id: noteId },
                 { $set: fields }
             );
@@ -120,6 +120,9 @@ export class NoteController {
                 // Convert to boolean if the value is 'true' or 'false'
                 if (value === 'true' || value === 'false') {
                     typedValue = value === 'true';
+                    // Convert to number if it's a numeric string
+                } else if (!isNaN(value) && value !== '') {
+                    typedValue = Number(value);
                 }
 
                 if (operator) {
