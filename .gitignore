@@ -23,3 +23,7 @@ Thumbs.db
 
 # Testing
 coverage/
+
+# Database files
+code/data/
+*.db

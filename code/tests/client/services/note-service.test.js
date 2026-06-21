@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { NoteService } from '../../public/scripts/services/note-service.js';
-import { Note } from '../../public/scripts/models/note.js';
+import { NoteService } from '../../../public/scripts/services/note-service.js';
+import { Note } from '../../../public/scripts/models/note.js';
 
 describe('NoteService', () => {
     let newNote;
@@ -65,32 +65,32 @@ describe('NoteService', () => {
         });
 
         it('should return filtered notes when a filter is applied', () => {
-            noteService.filterNotes((note) => note.id > 1);
+            noteService.filterNotes((note) => note._id > 1);
             const notes = noteService.getNotes();
             expect(notes).toHaveLength(2);
-            expect(notes.every(note => note.id > 1)).toBe(true);
+            expect(notes.every(note => note._id > 1)).toBe(true);
         });
 
         it('should return sorted notes when a custom sort is applied', () => {
-            noteService.sortNotes((a, b) => b.id - a.id);
+            noteService.sortNotes((a, b) => b._id - a._id);
             const notes = noteService.getNotes();
-            expect(notes[0].id).toBe(3);
-            expect(notes[1].id).toBe(2);
-            expect(notes[2].id).toBe(1);
+            expect(notes[0]._id).toBe(3);
+            expect(notes[1]._id).toBe(2);
+            expect(notes[2]._id).toBe(1);
         });
 
         it('should apply both filter and sort', () => {
-            noteService.filterNotes((note) => note.id >= 1);
-            noteService.sortNotes((a, b) => b.id - a.id);
+            noteService.filterNotes((note) => note._id >= 1);
+            noteService.sortNotes((a, b) => b._id - a._id);
             const notes = noteService.getNotes();
             expect(notes).toHaveLength(3);
-            expect(notes[0].id).toBe(3);
-            expect(notes[1].id).toBe(2);
-            expect(notes[2].id).toBe(1);
+            expect(notes[0]._id).toBe(3);
+            expect(notes[1]._id).toBe(2);
+            expect(notes[2]._id).toBe(1);
         });
 
         it('should return empty array when filter excludes all notes', () => {
-            noteService.filterNotes((note) => note.id > 100);
+            noteService.filterNotes((note) => note._id > 100);
             const notes = noteService.getNotes();
             expect(notes).toEqual([]);
         });
@@ -99,36 +99,36 @@ describe('NoteService', () => {
     describe('addNote', () => {
         it('should add a note with an auto-generated ID', () => {
             const addNote = noteService.addNote(newNote);
-            expect(addNote.id).toBe(4);
+            expect(addNote._id).toBe(4);
             expect(noteService.notes).toHaveLength(4);
         });
 
         it('should generate the next ID correctly after deletion', () => {
             noteService.removeNote(3);
             const addNote = noteService.addNote(newNote);
-            expect(addNote.id).toBe(4);
+            expect(addNote._id).toBe(4);
         });
 
         it('should add multiple notes with sequential IDs', () => {
             const addNote1 = noteService.addNote(newNote);
             const addNote2 = noteService.addNote(newNote);
-            expect(addNote1.id).toBe(4);
-            expect(addNote2.id).toBe(5);
+            expect(addNote1._id).toBe(4);
+            expect(addNote2._id).toBe(5);
         });
 
         it('should add a note to an empty list with ID 1', () => {
             const emptyService = new NoteService([]);
             const newNote = new Note(2, 'First Note', 'Content', new Date(), 5, false);
             const addedNote = emptyService.addNote(newNote);
-            expect(addedNote.id).toBe(1);
+            expect(addedNote._id).toBe(1);
             expect(emptyService.notes).toHaveLength(1);
         });
 
         it('should preserve other note properties when adding', () => {
             // const newNote = new Note(2, 'Test', 'Test Content', new Date('2024-01-01'), new Date('2024-01-02'), 3, false);
             noteService.addNote(newNote);
-            noteService.getNoteById(newNote.id);
-            expect(newNote.id).toBe(2); // Original newNote ID should remain unchanged
+            noteService.getNoteById(newNote._id);
+            expect(newNote._id).toBe(2); // Original newNote ID should remain unchanged
             expect(newNote.title).toBe('New Note');
             expect(newNote.content).toBe('New Content');
             expect(newNote.dueDate).toEqual(new Date('2026-07-10'));
@@ -149,7 +149,7 @@ describe('NoteService', () => {
         it('should preserve original properties when updating partial properties', () => {
             const originalNote = noteService.getNoteById(1);
             const originalCreated = originalNote.created;
-            const updatedNote = { id: 1, title: 'New Title' };
+            const updatedNote = { _id: 1, title: 'New Title' };
             noteService.updateNote(updatedNote);
             const note = noteService.getNoteById(1);
             expect(note.title).toBe('New Title');
@@ -158,14 +158,14 @@ describe('NoteService', () => {
 
         it('should not add a note if ID does not exist', () => {
             const initialLength = noteService.notes.length;
-            const nonExistentNote = { id: 999, title: 'Ghost Note' };
+            const nonExistentNote = { _id: 999, title: 'Ghost Note' };
             noteService.updateNote(nonExistentNote);
             expect(noteService.notes).toHaveLength(initialLength);
         });
 
         it('should update multiple notes independently', () => {
-            noteService.updateNote({ id: 1, importance: 2 });
-            noteService.updateNote({ id: 2, importance: 3 });
+            noteService.updateNote({ _id: 1, importance: 2 });
+            noteService.updateNote({ _id: 2, importance: 3 });
             expect(noteService.getNoteById(1).importance).toBe(2);
             expect(noteService.getNoteById(2).importance).toBe(3);
             expect(noteService.getNoteById(3).importance).toBe(1);
@@ -174,7 +174,7 @@ describe('NoteService', () => {
         it('should handle updating all properties of a note', () => {
             const newDate = new Date();
             const updatedNote = {
-                id: 2,
+                _id: 2,
                 title: 'Completely New',
                 content: 'Completely Different Content',
                 created: newDate,
@@ -249,19 +249,19 @@ describe('NoteService', () => {
         });
 
         it('should replace previous sort function', () => {
-            noteService.sortNotes((a, b) => b.id - a.id);
+            noteService.sortNotes((a, b) => b._id - a._id);
             let notes = noteService.getNotes();
-            expect(notes[0].id).toBe(3);
+            expect(notes[0]._id).toBe(3);
 
-            noteService.sortNotes((a, b) => a.id - b.id);
+            noteService.sortNotes((a, b) => a._id - b._id);
             notes = noteService.getNotes();
-            expect(notes[0].id).toBe(1);
+            expect(notes[0]._id).toBe(1);
         });
 
         it('should work with complex sort logic', () => {
             const complexSort = (a, b) => {
                 if (a.importance === b.importance) {
-                    return a.id - b.id;
+                    return a._id - b._id;
                 }
                 return b.importance - a.importance;
             };
@@ -275,24 +275,24 @@ describe('NoteService', () => {
         it('should reset to default sorting when resetFiltersAndSorting is called', () => {
             noteService.sortNotes((a, b) => b.importance - a.importance);
             const notesBeforeReset = noteService.getNotes();
-            expect(notesBeforeReset[0].id).toBe(2);
-            expect(notesBeforeReset[1].id).toBe(1);
-            expect(notesBeforeReset[2].id).toBe(3);
+            expect(notesBeforeReset[0]._id).toBe(2);
+            expect(notesBeforeReset[1]._id).toBe(1);
+            expect(notesBeforeReset[2]._id).toBe(3);
 
             noteService.resetFiltersAndSorting();
             const notes = noteService.getNotes();
-            expect(notes[0].id).toBe(1);
-            expect(notes[1].id).toBe(2);
-            expect(notes[2].id).toBe(3);
+            expect(notes[0]._id).toBe(1);
+            expect(notes[1]._id).toBe(2);
+            expect(notes[2]._id).toBe(3);
         });
     });
 
     describe('filterNotes', () => {
         it('should set a custom filter function', () => {
-            noteService.filterNotes((note) => note.id > 1);
+            noteService.filterNotes((note) => note._id > 1);
             const notes = noteService.getNotes();
             expect(notes).toHaveLength(2);
-            expect(notes.every(note => note.id > 1)).toBe(true);
+            expect(notes.every(note => note._id > 1)).toBe(true);
         });
 
         it('should filter by string properties', () => {
@@ -319,7 +319,7 @@ describe('NoteService', () => {
         });
 
         it('should allow filtering that matches all notes', () => {
-            noteService.filterNotes((note) => note.id >= 0);
+            noteService.filterNotes((note) => note._id >= 0);
             const notes = noteService.getNotes();
             expect(notes).toHaveLength(3);
         });
@@ -366,11 +366,11 @@ describe('NoteService', () => {
                 id 1: importance 3 */
 
             // Update
-            noteService.updateNote({ id: 1, importance: 2 });
+            noteService.updateNote({ _id: 1, importance: 2 });
             filtered = noteService.getNotes();
             expect(filtered).toHaveLength(2);
-            expect(filtered[0].id).toBe(2);
-            expect(filtered[1].id).toBe(4);
+            expect(filtered[0]._id).toBe(2);
+            expect(filtered[1]._id).toBe(4);
             /*  id 2: importance 5
                 id 4: importance 4 (newNote) */
 
@@ -385,14 +385,14 @@ describe('NoteService', () => {
             noteService.resetFiltersAndSorting();
             const allNotes = noteService.getNotes();
             expect(allNotes).toHaveLength(3);
-            expect(allNotes[0].id).toBe(2);
-            expect(allNotes[1].id).toBe(3);
-            expect(allNotes[2].id).toBe(4);
+            expect(allNotes[0]._id).toBe(2);
+            expect(allNotes[1]._id).toBe(3);
+            expect(allNotes[2]._id).toBe(4);
         });
 
         it('should maintain state correctly across multiple operations', () => {
             noteService.addNote(newNote);
-            noteService.updateNote({ id: 2, importance: 5 });
+            noteService.updateNote({ _id: 2, importance: 5 });
             noteService.filterNotes((note) => note.importance >= 2);
 
             const notes = noteService.getNotes();

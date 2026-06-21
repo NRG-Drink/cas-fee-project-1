@@ -1,6 +1,4 @@
 import { Note } from '../models/note.js';
-import { NoteEditView } from '../views/note-edit-view.js';
-import { NoteService } from '../services/note-service.js';
 
 export class NoteEditController {
     constructor(noteEditView) {
@@ -12,16 +10,16 @@ export class NoteEditController {
         this.form = document.querySelector('#note-edit-form');
     }
 
-    withNoteSaveCallback(callback) {
+    withNoteSaveCallback = (callback) => {
         this.saveNoteCallback = callback;
     }
 
-    initialize() {
+    initialize = () => {
         this.addEventListeners();
         this.noteEditView.hide();
     }
 
-    getNoteData() {
+    getNoteData = () => {
         const formData = new FormData(this.form);
         return new Note(
             this.editNoteId,
@@ -33,18 +31,18 @@ export class NoteEditController {
         );
     }
 
-    getRatingValue() {
+    getRatingValue = () => {
         const selectedRating = document.querySelector('.star-rating input[name="rating"]:checked');
         return selectedRating ? selectedRating.value : null;
     }
 
-    handleEditNote(note) {
-        this.editNoteId = note.id;
+    handleEditNote = (note) => {
+        this.editNoteId = note._id;
         this.noteEditView.prefillForm(note);
         this.noteEditView.show();
     }
 
-    handleCreateNewNote() {
+    handleCreateNewNote = () => {
         // TODO: Test data. Remove when form is working.
         ///// Test data /////
         this.noteEditView.prefillForm({
@@ -59,21 +57,23 @@ export class NoteEditController {
         this.noteEditView.show();
     }
 
-    handleSaveNote() {
+    handleSaveNote = async () => {
         const noteData = this.getNoteData();
         console.log('Saving note:', noteData);
+
+        // Hide first to make scroll on callback work properly.
+        this.noteEditView.hide();
+
         if (this.saveNoteCallback) {
-            this.saveNoteCallback(noteData);
+            await this.saveNoteCallback(noteData);
         }
+    }
 
+    handleCancelEdit = () => {
         this.noteEditView.hide();
     }
 
-    handleCancelEdit() {
-        this.noteEditView.hide();
-    }
-
-    addEventListeners() {
+    addEventListeners = () => {
         this.createButton.addEventListener('click', () => this.handleCreateNewNote());
         // Save button
         this.form.addEventListener('submit', (event) => {

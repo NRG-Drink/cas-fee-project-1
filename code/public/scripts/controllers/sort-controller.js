@@ -1,7 +1,3 @@
-import { SortService } from '../services/sort-service.js';
-import { ButtonNameIconView } from '../views/button-name-icon-view.js';
-import { NoteService } from '../services/note-service.js';
-
 export class SortController {
     constructor(sortService, sortView, noteService) {
         this.sortService = sortService;
@@ -10,7 +6,7 @@ export class SortController {
 
         this.container = document.querySelector('#menu');
 
-        this.sortComplete = document.querySelector('#btn_sort-complete');
+        this.sortComplete = document.querySelector('#btn_sort-completed');
         this.sortTitle = document.querySelector('#btn_sort-title');
         this.sortDueDate = document.querySelector('#btn_sort-due-date');
         this.sortCreationDate = document.querySelector('#btn_sort-creation-date');
@@ -29,7 +25,7 @@ export class SortController {
     }
 
     registerToService = () => {
-        this.sortService.registerSort('complete', 'Sort by Complete');
+        this.sortService.registerSort('completed', 'Sort by Complete');
         this.sortService.registerSort('title', 'Sort by Title');
         this.sortService.registerSort('dueDate', 'Sort by Due Date');
         this.sortService.registerSort('createdAt', 'Sort by Creation Date');
@@ -37,7 +33,7 @@ export class SortController {
     }
 
     addDataAttributes = () => {
-        this.sortComplete.dataset.sortKey = 'complete';
+        this.sortComplete.dataset.sortKey = 'completed';
         this.sortTitle.dataset.sortKey = 'title';
         this.sortDueDate.dataset.sortKey = 'dueDate';
         this.sortCreationDate.dataset.sortKey = 'createdAt';
@@ -45,7 +41,7 @@ export class SortController {
     }
 
     setCurrentButtonTexts = () => {
-        this.setCurrentIcon(this.sortComplete, 'complete');
+        this.setCurrentIcon(this.sortComplete, 'completed');
         this.setCurrentIcon(this.sortTitle, 'title');
         this.setCurrentIcon(this.sortDueDate, 'dueDate');
         this.setCurrentIcon(this.sortCreationDate, 'createdAt');
