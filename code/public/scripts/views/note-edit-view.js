@@ -20,6 +20,7 @@ export class NoteEditView {
 
     prefillForm(note) {
         this.editNoteId = note._id;
+        this.isComplete.checked = note.completed;
         this.title.value = note.title;
         this.content.value = note.content;
         this.dueDate.value = note.dueDate;
