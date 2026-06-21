@@ -5,7 +5,7 @@ export class NoteController {
     constructor() {
         // Initialize NeDB database with file persistence
         this.db = new Datastore({
-            filename: CONFIG.data("notes.db"),
+            filename: CONFIG.data(process.env.DB_NAME || "notes.db"),
             autoload: true
         });
     }

@@ -1,12 +1,16 @@
 # CAS FEE Project 1 - Note App
+
+
 ## How to Run the App
 1. Clone repo
 2. Install dependencies `npm install`
-3. Run server `npm run start`
-4. Connect to server with browser `http://127.0.0.1:3004`
+3. Create your `.env` file from [.env.example](./code/.env.example)
+4. Run server `npm run start`
+5. Connect to server with browser `http://127.0.0.1:3000` (use your values from the .env file)
 
 > [!NOTE]
 > The html file and all depending files are provided by the server when calling the root address `/`.
+
 
 ## How to Use the App
 Most of the functions should be self explaining, so this explanation goes only over the more non logic stuff.  
@@ -49,10 +53,12 @@ Click the dark/light mode button in the top right corner to switch the theme.
 
 ![theme-change](./docs/imgs/theme-change.gif)
 
+
 ## How to Develop
 ### Server
 All server relevant code is in the [code](./code/) folder.  
-Use `npm run start` to start the server.
+Use `npm run start` to start the server.  
+Use the [`.env`](./code/.env.example) file to configure the server to your needs.
 
 ### Client
 All client relevant code is in the [code/public](./code/public/) folder.  
