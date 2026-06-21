@@ -1,5 +1,4 @@
 import Datastore from "@seald-io/nedb";
-import { Note } from "../public/scripts/models/note.js";
 import { CONFIG } from "../config.js";
 
 export class NoteController {
@@ -9,19 +8,6 @@ export class NoteController {
             filename: CONFIG.data("notes.db"),
             autoload: true
         });
-    }
-
-    seed = async () => {
-        const notes = [
-            new Note(undefined, "AAA", "KKK", new Date('2026-06-01'), 1, false),
-            new Note(undefined, "BBB", "XXX", new Date('2026-06-02'), 2, true),
-            new Note(undefined, "CCC", "ZZZ", new Date('2026-06-03'), 3, false),
-            new Note(undefined, "DDD", "YYY", new Date('2026-06-04'), 4, true),
-        ];
-
-        for (const note of notes) {
-            await this.db.insertAsync(note);
-        }
     }
 
     getAllNotes = async (req, res) => {
@@ -137,6 +123,4 @@ export class NoteController {
     }
 }
 
-const noteController = new NoteController();
-// noteController.seed(); // Seed the database with initial notes
-export { noteController };
+export const noteController = new NoteController();
