@@ -7,8 +7,10 @@
     "type": "module",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js",
+        "start": "node code/index.js",
         "start:watch": "node --watch index.js",
+        "test": "vitest",
+        "test:coverage": "vitest --coverage",
         "lint": "eslint \"**/*.js\" \"**/*.css\"",
         "format": "prettier --write \"**/*.{js,cjs,mjs,css,html,json,md}\"",
         "format:check": "prettier --check \"**/*.{js,cjs,mjs,css,html,json,md}\""
@@ -16,11 +18,15 @@
     "devDependencies": {
         "@eslint/css": "^1.1.0",
         "@eslint/js": "^10.0.1",
+        "@vitest/coverage-v8": "^4.1.8",
         "eslint": "^10.2.0",
         "globals": "^17.5.0",
-        "prettier": "3.8.2"
+        "prettier": "3.8.4",
+        "vitest": "^4.1.8"
     },
     "dependencies": {
+        "@seald-io/nedb": "^4.1.2",
+        "dotenv": "^17.4.2",
         "express": "^5.2.1"
     }
 }

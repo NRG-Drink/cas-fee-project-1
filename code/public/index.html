@@ -1,19 +1,150 @@
 <!doctype html>
 <html lang="de">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Note App</title>
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
-            integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU="
-            crossorigin="anonymous"
-            defer
-        ></script>
-        <script src="scripts/index.js" type="module"></script>
 
-        <link rel="stylesheet" href="styles/index.css" />
-    </head>
-    <body>
-        <h1>Note App</h1>
-    </body>
+<head>
+    <meta charset="UTF-8" />
+    <title>Note App</title>
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.3/handlebars.min.js"
+        integrity="sha256-/PJBs6QWvXijOFIX04kZpLb6ZtSQckdOIavLWKKOgXU=" crossorigin="anonymous" defer></script> -->
+    <script src="scripts/index.js" type="module"></script>
+
+    <link rel="stylesheet" href="styles/index.css" />
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <a href="https://www.ost.ch" target="_blank" rel="noopener noreferrer">
+                <img src="images/ost-logo.png" alt="Beispielbild" class="header-image" />
+            </a>
+            <h2>CAS FEE Project 1 - Note App</h2>
+        </div>
+    </header>
+
+    <main>
+        <section id="menu">
+            <div class="menu">
+                <button id="btn_create-note">Create Note</button>
+                <button id="btn_theme-toggle">🌞/🌚</button>
+            </div>
+
+            <div id="menu-filters" class="menu-bar">
+                <button id="btn_filter-completed">Filter Completed</button>
+                <button id="btn_filter-overdue">Filter Overdue</button>
+            </div>
+            <div id="menu-sorts" class="menu-bar">
+                <button id="btn_sort-completed">Sort by Complete</button>
+                <button id="btn_sort-title">Sort by Title</button>
+                <button id="btn_sort-due-date">Sort by Due Date</button>
+                <button id="btn_sort-creation-date">Sort by Creation Date</button>
+                <button id="btn_sort-importance">Sort by Importance</button>
+            </div>
+        </section>
+
+
+        <section id="note-edit">
+            <form id="note-edit-form" class="note note-container">
+                <div class="note-checkbox">
+                    <input type="checkbox" id="edit-note-checkbox" name="isCompleted">
+                    <label for="edit-note-checkbox">
+                        <img class="unchecked-img" src="./images/components/checkbox-unchecked.png" alt="unchecked">
+                        <img class="checked-img" src="./images/components/checkbox-checked.png" alt="checked">
+                    </label>
+                </div>
+
+                <div class="note-data">
+                    <div class="note-header">
+                        <input type="date" id="edit-note-due-date" name="dueDate" required />
+                        <input type="text" id="edit-note-title" name="title" placeholder="Title" required />
+                        <fieldset class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5" />
+                            <label for="star5" title="Herausragend">🔥</label>
+
+                            <input type="radio" id="star4" name="rating" value="4" />
+                            <label for="star4" title="Sehr wichtig">🔥</label>
+
+                            <input type="radio" id="star3" name="rating" value="3" />
+                            <label for="star3" title="Mittel wichtig">🔥</label>
+
+                            <input type="radio" id="star2" name="rating" value="2" />
+                            <label for="star2" title="Weniger wichtig">🔥</label>
+
+                            <input type="radio" id="star1" name="rating" value="1" />
+                            <label for="star1" title="Unwichtig">🔥</label>
+
+                            <input type="radio" id="star0" name="rating" value="0" />
+                            <label for="star0" title="Keine">🧊</label>
+                        </fieldset>
+                    </div>
+
+                    <div class="note-details">
+                        <textarea id="edit-note-content" name="content" placeholder="Content"></textarea>
+                        <button id="btn_cancel-note" type="button" class="icon">❌</button>
+                        <button id="btn_save-note" type="submit" class="icon">💾</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <section id="note-view">
+            <div class="note note-container">
+
+                <div class="note-checkbox">
+                    <input type="checkbox" id="myCheckbox">
+                    <label for="myCheckbox">
+                        <img class="unchecked-img" src="./images/components/checkbox-unchecked.png" alt="unchecked">
+                        <img class="checked-img" src="./images/components/checkbox-checked.png" alt="checked">
+                    </label>
+                </div>
+
+                <details class="note-data">
+                    <summary class="note-header">
+                        <div class="note-due-date">2026-05-16</div>
+                        <div class="note-title">Note Title</div>
+                        <div class="note-importance">🔥🔥🔥🔥🔥</div>
+                    </summary>
+
+                    <div class="note-details">
+                        <div class="note-text">
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                            Note content goes here...
+                        </div>
+                        <button class="btn_delete icon">🗑️</button>
+                        <button class="btn_edit icon">✏️</button>
+                    </div>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <div class="footer-link">
+                <img class="footer-icon" src="images/github-logo.png" alt="GitHub Logo" >
+                <a class="footer-link" href="https://github.com/NRG-Drink/cas-fee-project-1" target="_blank" rel="noopener noreferrer">
+                    GitHub Repository
+                </a>
+            </div>
+            <div class="footer-link">
+                <img class="footer-icon" src="https://avatars.githubusercontent.com/u/123409068?v=4"
+                    alt="Developer Image">
+                <a href="https://github.com/NRG-Drink" target="_blank" rel="noopener noreferrer">
+                    Developer
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+
 </html>
