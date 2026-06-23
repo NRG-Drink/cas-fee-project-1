@@ -1,9 +1,9 @@
 {
-    "name": "vorlage",
+    "name": "cas-fee-project-1",
     "version": "1.0.0",
     "description": "",
-    "license": "ISC",
-    "author": "",
+    "license": "MIT",
+    "author": "Beat Zimmermann",
     "type": "module",
     "main": "index.js",
     "scripts": {
