@@ -12,6 +12,7 @@ on:
     paths:
       - '.github/workflows/**'
       - 'code/**'
+      - 'package-lock.json'
       - '!**.md'
       - '!docs/**'
 
@@ -23,7 +24,7 @@ jobs:
     steps:
       # Step 1: Check out the repository
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 

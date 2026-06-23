@@ -7,7 +7,7 @@ export default defineConfig({
       all: true,
       provider: 'v8', // Use 'v8' for built-in coverage
       reporter: ['text', 'json', 'html'], // Formats for the coverage report
-      include: ['code/public/scripts/**/*'], // Include files for coverage
+      include: ['code/public/scripts/**/*', 'code/controllers/**/*', 'code/routes/**/*'], // Include files for coverage
       exclude: ['node_modules', 'code/public/scripts/index.js'], // Exclude specific files
     },
   },
