@@ -12,6 +12,7 @@ on:
     paths:
       - '.github/workflows/**'
       - 'code/**'
+      - 'package-lock.json'
       - '!**.md'
       - '!docs/**'
 
