@@ -18,9 +18,9 @@
     "devDependencies": {
         "@eslint/css": "^1.1.0",
         "@eslint/js": "^10.0.1",
-        "@vitest/coverage-v8": "^4.1.8",
+        "@vitest/coverage-v8": "^4.1.9",
         "eslint": "^10.2.0",
-        "globals": "^17.5.0",
+        "globals": "^17.7.0",
         "prettier": "3.8.4",
         "vitest": "^4.1.8"
     },
